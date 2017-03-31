@@ -35,6 +35,11 @@ interface bExam {
 	public abstract void bye();
 	
 }
+
+//interface 다중 상속
+interface cExam extends aExam, bExam {
+	
+}
 //인터페이스 상속 시 인터페이스에 정의된 모든 추상 메소드 구현해야함
 class InterfaceExam implements aExam, bExam {
 	public void hello() {
@@ -51,8 +56,16 @@ abstract class Figure {
 	abstract void area(int a, int b);
 }
 
-class Rectangle extends Figure {
+class Rectangle extends Figure implements cExam{
 	void area(int a, int b) {
 		System.out.println("area : " + (a*b));
+	}
+	
+	public void hello() {
+		
+	}
+	
+	public void bye() {
+		
 	}
 }
