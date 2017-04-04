@@ -36,6 +36,16 @@ public class ThreadTest extends Thread {
 		for(int i=0 ; i<threads.size() ; i++) {
 			
 			Thread test = threads.get(i);
+			try {
+				/*
+				 * 쓰레드가 종료된 후 다음 로직 수행
+				 * 쓰레드가 종료될 때 까지 대기하는 메소드
+				 */
+				test.join();
+				
+			} catch(Exception e) {
+				
+			}
 			
 		}
 		System.out.println("main end.");
