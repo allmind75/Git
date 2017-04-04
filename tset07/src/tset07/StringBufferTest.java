@@ -23,5 +23,6 @@ public class StringBufferTest {
 		System.out.println(sb.insert(11, "hi "));	// 원하는 위치에 문자열 삽입
 		System.out.println(sb.substring(0, 4));		// 문자열 자르기	
 		
+		System.out.println(sb.toString().getBytes().length);
 	}
 }
