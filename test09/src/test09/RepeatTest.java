@@ -44,6 +44,8 @@ public class RepeatTest {
 		print6();
 		print7();
 		print8();
+		print9();
+	
 	}
 	
 	public static void name() {
@@ -52,7 +54,7 @@ public class RepeatTest {
 		 * 자신의 이름을 7번 출력하는 프로그램 작성
 		 */
 		int count = 0;
-		while( count<7 ) {
+		while( count < 7 ) {
 			count++;
 			System.out.println( count + ". 장환호");
 		}
@@ -73,8 +75,12 @@ public class RepeatTest {
 	
 	public static void print() {
 		
+		/*
+		 * 아래와 같이 출력되는 프로그램 작성
+		 * -5 -4 -3 -2 -1 0 1 2 3 4 5
+		 */
 		int n = -5;
-		while( n < 6 ) {
+		while( n <= 5 ) {
 			
 			System.out.print(n + " ");			
 			n++;
@@ -84,11 +90,15 @@ public class RepeatTest {
 	
 	public static void print5() {
 		
+		/*
+		 * 아래와 같이 출력되는 프로그램 작성
+		 * 5 4 3 2 1 0 1 2 3 4 5
+		 */
 		int n = -5;
-		while( n < 6 ) {
+		while( n <= 5 ) {
 			
 			if( n < 0 )
-				System.out.print(n * -1);
+				System.out.print(-n);
 			else
 				System.out.print(n);
 			
@@ -145,7 +155,28 @@ public class RepeatTest {
 			System.out.print(n + " ");
 			n -= 3;
 		}
+		System.out.println();
 	}
+	
+	public static void print9() {
+		/*
+		 * [문제]
+		 * 1024의 약수를 출력하는 프로그램 작성
+		 */
+		
+		int n = 1024;
+		int count = 0;
+		
+		for(int i=1 ; i<=1024 ; i++){
+			if(n%i == 0) {
+				System.out.print(i + " ");
+				count++;
+			}
+		}
+		
+		System.out.println("\n1024의 약수의 갯수 : " + count);
+	}
+	
 	
 	
 }
