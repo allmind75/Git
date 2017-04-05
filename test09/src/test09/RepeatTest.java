@@ -390,7 +390,7 @@ public class RepeatTest {
  		int money = 1000000;
  		int interest = 10;
  		for(int i=0 ; i<10 ; i++) {
- 			money = money + money/10;
+ 			money = money + money/interest;
  		}
  		System.out.println("ÃÑ ¿¹±İ¾× : " + money + "¿ø");
  	}
