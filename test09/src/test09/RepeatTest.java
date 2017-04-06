@@ -545,7 +545,7 @@ public class RepeatTest {
  		 * 13 14 15 16 17 18
  		 */
  		for(int i=0 ; i<=2 ; i++) {
- 			for(int j=i*6 + 1 ; j<(i*6)+7 ; j++) {
+ 			for(int j=i*6 ; j<=(i*6)+6 ; j++) {
  				System.out.printf("%3d ", j);
  			}
  			System.out.println();
