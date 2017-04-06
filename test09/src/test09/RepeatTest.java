@@ -52,10 +52,19 @@ public class RepeatTest {
 //		print14();
 //		print15();
 //		print16();
-		print17();
-		print18();
-		print19();
-		print20();
+//		print17();
+//		print18();
+//		print19();
+//		print20();
+//		print21();
+//		print22();
+//		print23();
+//		print24();
+//		print25();
+//		print26();
+//		print27();
+		print28();
+		print29();
 		
 	}
 	
@@ -395,4 +404,170 @@ public class RepeatTest {
  		System.out.println("총 예금액 : " + money + "원");
  	}
  	
+ 	public static void print21() {
+ 		
+ 		/*
+ 		 * [문제]
+ 		 * 20에서 100사이의 정수 중에서 가장 작은 17의 배수를 구하시오.
+ 		 */
+ 		for(int i=20 ; i<=100 ; i++) {
+ 			if(i%17 == 0) {
+ 				System.out.println(i);
+ 				break;
+ 			}
+ 		}
+ 	}
+ 	
+ 	public static void print22() {
+ 		/*
+ 		 * [문제]
+ 		 * 1에서 1000사이의 정수 중에서
+ 		 * 가장 큰 13의 배수를 구하시오
+ 		 */
+ 		for(int i=1000 ; i>0 ; i--) {
+ 			if(i%13 == 0) {
+ 				System.out.println(i);
+ 				break;
+ 			}
+ 		}
+ 	}
+ 	
+ 	public static void print23() {
+ 		/*
+ 		 * [문제]
+ 		 * 자신의 개인정보를 출력하는 프로개름 작성
+ 		 * 단, 아래와 같이 프로그램이 동작해야함.
+ 		 * 
+ 		 * (1) 아래와 같은 메뉴를 출력함
+ 		 * 메뉴] 1.이름  |  2.취미  |  3.좋아하는영화  |  4.종료
+ 		 * 
+ 		 * (2) 위의 메뉴 출력과 선택은 계속 반복이되고, 4 메뉴 선택 시 종료
+ 		 * 
+ 		 * (3) 1 메뉴를 선택하면, 이름 출력
+ 		 *     2 메뉴를 선택하면, 취미 출력
+ 		 */
+ 		
+ 		 String name = "Jang Hwan Ho";
+ 		 String hobby = "StarCraft";
+ 		 String movie = "Fast and Furious";
+ 		 int choice;
+ 		 int cnt = 1;
+ 		 
+ 		System.out.println("--------자신의 개인정보 출력-------");
+ 		 for(;;) {
+
+ 			 System.out.println("메뉴] 1.이름  |  2.취미  |  3.좋아하는 영화  |  4.종료");
+ 			 System.out.print("메뉴 선택> ");
+ 			 choice = sc.nextInt();
+ 			 
+ 			 if(choice == 4) break;
+ 			 
+ 			 switch(choice) {
+ 			 case 1:
+ 				 System.out.println("이름은 " + name + " 입니다.");
+ 				 break;
+ 			 case 2:
+ 				 System.out.println("취미는 " + hobby + " 입니다.");
+ 				 break;
+ 			 case 3:
+ 				 System.out.println("좋아하는 영화는 " + movie + " " + cnt+ " 입니다.");
+ 	 			 if(cnt > 7) cnt=1;
+ 	 			 else cnt++;
+ 				 break;
+ 			 default:
+ 				 System.out.println("잘못된 입력입니다.");
+ 			 }
+ 		 }
+ 		 System.out.println("--------프로그램 종료-------");
+ 	}
+
+ 	public static void print24() {
+ 		/*
+ 		 * 문제
+ 		 * 1+2+3 ... + 100의 결과 출력
+ 		 */
+ 		int sum = 0;
+ 		for(int i=1; i<=100 ; i++) {
+ 			sum += i;
+ 		}
+ 		System.out.println(sum);
+ 	}
+ 	
+ 	public static void print25() {
+ 		/*
+ 		 * 문제
+ 		 * 1-2+3-4....-100의 결과 출력
+ 		 */
+ 		int sum = 0;
+ 		for(int i=1 ; i<=100 ; i++) {
+ 			if(i%2 == 0) {
+ 				sum -= i;
+ 			} else {
+ 				sum += i;
+ 			}
+ 		}
+ 		System.out.println(sum);
+ 	}
+ 	
+ 	public static void print26() {
+ 		/*
+ 		 * 문제
+ 		 * 10! 출력
+ 		 */
+ 		int facto = 1;
+ 		
+ 		for(int i=1; i<=10 ; i++) {
+ 			facto *= i;
+ 		}
+ 		System.out.println(facto);
+ 	}
+
+ 	public static void print27() {
+ 		
+ 		double sum = 0.0;
+ 		
+ 		for(double i=1 ; i<100 ; i++) {
+ 			
+ 			if(i%2 == 0) {
+ 				sum += (i/(i+1));
+ 			} else {
+ 				sum -= (i/(i+1));
+ 			}
+ 		}
+ 		System.out.println(sum);
+ 	}
+
+ 	public static void print28() {
+ 		/*
+ 		 * [문제]
+ 		 *  1  2  3  4  5  6
+ 		 *  7  8  9 10 11 12 
+ 		 * 13 14 15 16 17 18
+ 		 */
+ 		for(int i=0 ; i<=2 ; i++) {
+ 			for(int j=i*6 + 1 ; j<(i*6)+7 ; j++) {
+ 				System.out.printf("%3d ", j);
+ 			}
+ 			System.out.println();
+ 		}
+ 	}
+ 	
+ 	public static void print29() {
+ 		/*
+ 		 * [문제]
+ 		 * @
+ 		 * @@
+ 		 * @@@
+ 		 * @@@@
+ 		 * ...
+ 		 * @@@@@@@@@@
+ 		 */
+ 		for(int i=1 ; i<=10 ; i++) {
+ 			for(int j=1 ; j<=i ; j++) {
+ 				System.out.print("@");
+ 			}
+ 			System.out.println();
+ 		}
+ 	}
+ 	 	
 }
