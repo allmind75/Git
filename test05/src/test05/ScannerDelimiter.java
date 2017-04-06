@@ -10,7 +10,7 @@ import javax.swing.JFrame;
  * while문 종료시켜보기
  * http://egloos.zum.com/LucasLee/v/571015 
  */
-public class Test {
+public class ScannerDelimiter {
 
 	public static void main(String[] args) {
 		int strNum = 0;
