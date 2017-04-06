@@ -27,7 +27,6 @@ public class ScannerDelimiter {
 				String s = sc2.next();
 				System.out.println(s);
 				strNum++;
-				if(!sc2.hasNext()) break;
 			}
 		}
 		
