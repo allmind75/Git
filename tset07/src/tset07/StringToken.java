@@ -8,9 +8,9 @@ public class StringToken {
 
 	public static void main(String[] args) {
 		
-		String str = "0123456";
-		int length;
-		char chr;
+//		String str = "0123456";
+//		int length;
+//		char chr;
 		
 //		str = sc.nextLine();
 //		length = str.length();			//문자열 길이

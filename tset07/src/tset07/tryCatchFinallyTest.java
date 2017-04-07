@@ -9,7 +9,7 @@ public class tryCatchFinallyTest {
 	public static void main(String[] args) {
 		
 		tryCatchFinallyTest test = new tryCatchFinallyTest();
-		int c;
+		int c = 0;
 		
 		try {
 			

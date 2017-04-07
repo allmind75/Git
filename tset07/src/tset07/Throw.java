@@ -16,6 +16,8 @@ public class Throw {
 		} catch (NegativeException ne) {
 			System.out.println(ne);
 		}
+		
+		sc.close();
 	}
 	
 	public static int inputNum(int num) throws NegativeException {
