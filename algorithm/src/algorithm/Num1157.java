@@ -23,37 +23,40 @@ public class Num1157 {
 		int[] alphabet = new int[26];
 		char temp;
 		int max = 0;
-		boolean flag = false;
-		int index = 0;
-		
+		char index = 0;
+		int length;
+		int cnt = 0;
 		Scanner sc = new Scanner(System.in);
 		
 		s = sc.nextLine();
+		length = s.length();
+		s = s.toUpperCase();	//대문자로 변경
 		
-		for(int i=0 ; i<s.length() ; i++) {
+		for(int i=0 ; i<length ; i++) {
 			int n;
-			s = s.toUpperCase();
 			temp = s.charAt(i);
 			n = temp - 'A';
-			alphabet[n] += 1;
-		}
-		
-		for(int i=0 ; i<alphabet.length ; i++) {
-			if(alphabet[i] > max) {
-				max = alphabet[i];
-				index = i;
-			} else if(alphabet[i] == max) {
-				flag = true;
-				break;
+			alphabet[n]++;
+			
+			if(alphabet[n] > max) {
+				max = alphabet[n];
+				index = temp;
 			}
 		}
 		
-		if(flag) {
+		for(int i=0 ; i<26 ; i++) {
+			if(alphabet[i] == max) {
+				cnt++;
+			}
+		}
+		
+		if(cnt > 1) {
 			System.out.println("?");
 		} else {
-			char c = (char) (65 + index);
-			System.out.println(c);
+			System.out.println(index);
 		}
+		
+		
 		sc.close();
 	}
 }
