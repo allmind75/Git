@@ -44,6 +44,8 @@ public class Num2908 {
 			System.out.println(n2);
 		}
 		
+		sc.close();
+		
 	}
 	
 	public static String change(String s) {
