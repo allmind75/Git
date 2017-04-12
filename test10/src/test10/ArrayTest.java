@@ -21,8 +21,8 @@ public class ArrayTest {
 		// print04();
 		// print05();
 		// print06();
-		print07();
-
+		//print07();
+		print08();
 	}
 
 	public static void print01() {
@@ -244,6 +244,48 @@ public class ArrayTest {
 				}
 				System.out.println();
 			}
+			System.out.println();
+		}
+	}
+	
+	public static void print08() {
+	/*
+	 * 문제
+	 * 국어, 영어, 수학 시험 점수가 아래와 같이 주어졌다.
+	 * 
+	 * 이름		국어		영어		수학
+	 * 강호동		80		85		56
+	 * 유재석		78		77		78
+	 * 신동엽		75		83		77
+	 * 홍길동		90		78		80
+	 * 전지현		85		90		85
+	 * 
+	 * 위에서 주어진 점수를 2차원 배열에 저장하고 위의 형식대로 출력
+	 *
+	 * 학생별 평균 구하기
+	 */
+		String[] name = new String[]{"강호동", "유재석", "신동엽", "홍길동", "전지현"};
+		int[][] grade = new int[][]{
+			{80, 78, 75, 90, 85},
+			{85, 77, 83, 78, 90},
+			{56, 78, 77, 80, 85}};
+		int[] sum = new int[]{0, 0, 0, 0, 0};
+		double[] avg = new double[]{0, 0, 0, 0, 0};
+
+		for(int i=0 ; i<5 ; i++) {
+			for(int j=0 ; j<grade.length ; j++) {
+				sum[i] += grade[j][i];
+			}
+			avg[i] = sum[i] / 3.0;
+		}
+		
+		System.out.println("이름\t" + "국어\t" + "영어\t" + "수학\t" + "평균");
+		for(int i=0 ; i<5 ; i++) {
+			System.out.print(name[i] + "\t");
+			for(int j=0 ; j<grade.length ; j++) {
+				System.out.print(grade[j][i] + "\t");
+			}
+			System.out.print(avg[i]);
 			System.out.println();
 		}
 	}
