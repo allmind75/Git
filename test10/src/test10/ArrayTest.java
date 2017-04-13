@@ -1,7 +1,5 @@
 package test10;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -17,13 +15,13 @@ public class ArrayTest {
 		//
 		// System.out.println(array1.length + " " + array2.length);
 
-		// print01();
-		// print02();
-		// print03();
-		// print04();
-		// print05();
-		// print06();
-		// print07();
+		 print01();
+		 print02();
+		 print03();
+		 print04();
+		 print05();
+		 print06();
+		 print07();
 
 	}
 
