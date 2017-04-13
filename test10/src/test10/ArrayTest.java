@@ -253,6 +253,7 @@ public class ArrayTest {
 		}
 	}
 
+
 	public static void print08() {
 
 		System.out.println("[¹®Á¦. 1]");
