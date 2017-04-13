@@ -10,14 +10,13 @@ public class Num09 {
 		
 		System.out.println("[문제. 9]");
 
-		String[] station = new String[] { "반석", "지족", "노은", "월드컵 경기장", "현충원", "구암", "유성온천", "갑천", "월평", "갈마", "정부청사",
+		String[] station = new String[] { "반석", "지족", "노은", "월드컵경기장", "현충원", "구암", "유성온천", "갑천", "월평", "갈마", "정부청사",
 				"시청", "탄방", "용문", "오룡", "서대전네거리", "중구청", "중앙로", "대전역", "대동", "신흥", "판암" };
 		int[] time = new int[] { 500, 300, 700, 320, 440, 340, 180, 230, 456, 230, 890, 340, 120, 789, 230, 543, 888,
 				333, 456, 789, 300 };
 		boolean run = true;
 
 		while (run) {
-
 			String temp;
 			String start;
 			String finish;
@@ -54,6 +53,9 @@ public class Num09 {
 					} else if (station[i].equals(finish)) {
 
 						finishIndex = i;
+					}else {
+						System.out.println("역 이름 잘못입력");
+						break;
 					}
 				}
 			}
