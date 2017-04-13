@@ -86,7 +86,6 @@ public class Num09 {
 				System.out.println("잘못입력");
 			}
 		}
-		
 		sc.close();
 		System.out.println("프로그램 종료");
 	}
