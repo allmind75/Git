@@ -8,7 +8,7 @@ public class Num09 {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("\n[문제. 9]");
+		System.out.println("[문제. 9]");
 
 		String[] station = new String[] { "반석", "지족", "노은", "월드컵 경기장", "현충원", "구암", "유성온천", "갑천", "월평", "갈마", "정부청사",
 				"시청", "탄방", "용문", "오룡", "서대전네거리", "중구청", "중앙로", "대전역", "대동", "신흥", "판암" };

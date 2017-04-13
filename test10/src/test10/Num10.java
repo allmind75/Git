@@ -8,7 +8,7 @@ public class Num10 {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("\n[배열2 - 문제. 1]");
+		System.out.println("[배열2 - 문제. 1]");
 
 		int[][] fruit = new int[][] { { 500, 400, 300, 600 }, { 1000, 900, 1200, 1500 }, { 10000, 9000, 8000, 7000 },
 				{ 1000, 800, 1200, 900 } };
