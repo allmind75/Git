@@ -9,7 +9,7 @@ public class Num08 {
 		String[] array;
 
 		array = s.split(",");
-
+				
 		for (int i = 0; i < array.length; i++) {
 
 			array[i] = array[i].trim();
