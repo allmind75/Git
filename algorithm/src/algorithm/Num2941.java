@@ -55,6 +55,8 @@ public class Num2941 {
 			}
 		}
 		System.out.println(cnt);
+		
+		sc.close();
 	}
 
 }

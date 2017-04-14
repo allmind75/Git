@@ -50,6 +50,8 @@ public class Num1475 {
 		
 		System.out.println(result);
 		
+		sc.close();
+		
 	}
 
 	public static void buy() {

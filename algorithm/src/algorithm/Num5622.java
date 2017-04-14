@@ -39,6 +39,8 @@ public class Num5622 {
 		}
 		
 		System.out.println(time);
+		
+		sc.close();
 	}
 
 }

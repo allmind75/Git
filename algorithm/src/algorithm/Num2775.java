@@ -38,6 +38,8 @@ public class Num2775 {
 			
 			System.out.println(array[k][n-1]);
 		}
+		
+		sc.close();
 	}
 
 }

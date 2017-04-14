@@ -38,6 +38,8 @@ public class Num1427 {
 		for(Integer i: array) {
 			System.out.print(i);
 		}
+		
+		sc.close();
 	}
 	
 	public static class CompareIntSort implements Comparator<Integer> {
