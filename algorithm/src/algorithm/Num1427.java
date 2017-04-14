@@ -44,7 +44,7 @@ public class Num1427 {
 		}
 		System.out.println();
 		long end = System.nanoTime();
-		double second = end - startTime / 1000000000.0;
+		double second = (end - startTime);
 		System.out.println(second);
 		
 		
@@ -70,7 +70,7 @@ public class Num1427 {
 		System.out.println(str);
 		
 		long end2 = System.nanoTime();
-		double second2 = end2 - startTime2 / 1000000000.0;
+		double second2 = (end2 - startTime2);
 		
 		System.out.println();
 		System.out.println(second2);
