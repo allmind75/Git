@@ -4,8 +4,8 @@ public class RankAlg {
 
 	public static void main(String[] args) {
 		
-		int[] grade = new int[]{47, 98, 56, 33, 85};
-		int[] rank = new int[]{1, 1, 1, 1, 1};
+		int[] grade = new int[]{47, 98, 56, 33, 85};	//성적
+		int[] rank = new int[]{1, 1, 1, 1, 1};			//등수
 		
 		
 		//rank 구하기
