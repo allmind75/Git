@@ -10,7 +10,7 @@ public class Num03 {
 		System.out.print("십자리와 일의자리가 같은 숫자는 : ");
 		for (int i = 0; i < array.length; i++) {
 
-			if (array[i] / 10 == array[i] % 10) {
+			if (array[i]%11 == 0) {
 				System.out.print(array[i] + " ");
 			}
 		}
