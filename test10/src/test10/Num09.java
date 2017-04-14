@@ -7,7 +7,7 @@ public class Num09 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
-		
+
 		System.out.println("[문제. 9]");
 
 		String[] station = new String[] { "반석", "지족", "노은", "월드컵경기장", "현충원", "구암", "유성온천", "갑천", "월평", "갈마", "정부청사",
@@ -20,8 +20,8 @@ public class Num09 {
 			String temp;
 			String start;
 			String finish;
-			int startIndex = 0;
-			int finishIndex = 0;
+			int startIndex = -1;
+			int finishIndex = -1;
 			int totalTime = 0;
 
 			System.out.println("\na. 지하철 목록 출력");
@@ -53,27 +53,29 @@ public class Num09 {
 					} else if (station[i].equals(finish)) {
 
 						finishIndex = i;
-					}else {
-						System.out.println("역 이름 잘못입력");
-						break;
-					}
+					} 
 				}
 			}
-			System.out.println("\nc. 출발역에서 도착역까지 소요되는 시간 출력(시간은 분초로 나우어 출력)");
+			
 
-			if (startIndex - finishIndex < 0) {
+			if (startIndex != -1 && finishIndex != -1) {
+				System.out.println("\nc. 출발역에서 도착역까지 소요되는 시간 출력(시간은 분초로 나우어 출력)");
+				if (startIndex > finishIndex) {
+					int t = startIndex;
+					startIndex = finishIndex;
+					finishIndex = t;
+				}
+
 				for (int i = startIndex; i < finishIndex; i++) {
 
 					totalTime += time[i];
 				}
+				System.out.println("소요시간 : " + totalTime / 60 + "분 " + totalTime % 60 + "초");
+				
 			} else {
-				for (int i = finishIndex; i < startIndex; i++) {
-
-					totalTime += time[i];
-				}
+				System.out.println("역이름이 잘못되었습니다.");
 			}
-			System.out.println("소요시간 : " + totalTime / 60 + "분 " + totalTime % 60 + "초");
-
+			
 			System.out.print("\nd. 계속 / 중단 입력> ");
 			temp = sc.nextLine();
 
@@ -89,6 +91,5 @@ public class Num09 {
 		sc.close();
 		System.out.println("프로그램 종료");
 	}
-	
 
 }
