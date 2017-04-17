@@ -23,7 +23,7 @@ public class RankAlg {
 		//출력
 		System.out.println("1. 출력");
 		for(int i=0 ; i<grade.length ; i++) {
-			System.out.println(rank[i] + "\t" + grade[i]);
+			System.out.println(rank[i] + "등" + "\t" + grade[i]);
 		}
 		System.out.println();
 		
@@ -39,7 +39,7 @@ public class RankAlg {
 		//출력
 		for(int i=0 ; i<rank.length ; i++) {
 			int t = index[i];
-			System.out.println(rank[t] + "\t" + grade[t]);
+			System.out.println(rank[t] + "등" + "\t" + grade[t]);
 		}
 	}
 }
