@@ -7,28 +7,28 @@ public class Method {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		int width, height;
-		int area;
+		double width, height;
+		double area;
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("사각형의 가로 세로 입력");
-		System.out.print("가로 입력> ");
-		width = sc.nextInt();
+		System.out.println("삼각형 가로 세로 입력");
+		System.out.print(" 가로 입력> ");
+		width = sc.nextDouble();
+
+		System.out.print(" 세로 입력> ");
+		height = sc.nextDouble();
 		
-		System.out.print("세로 입력> ");
-		height = sc.nextInt();
-		
-		area = rect(width, height);
-		System.out.println("사각형의 넓이 = " +area);
+		area = triArea(width, height);
+		System.out.println("삼각형의 넓이 = " +area);
 		
 		sc.close();
 
 	}
 	
 
-	static int rect(int x, int y) {
+	static double triArea(double x, double y) {
 	
-		return x*y;
+		return x*y/2;
 	}
 
 
