@@ -27,12 +27,8 @@ public class Num04 {
 
 	static boolean checkInput(int a, int b, int c) {
 
-		if (a > 0 && b > 0 && c > 0) {
-			if (a + b + c == 180) {
-				return true;
-			} else {
-				return false;
-			}
+		if ((a > 0 && b > 0 && c > 0) && a+b+c == 180) {
+			return true;
 		} else {
 			return false;
 		}
