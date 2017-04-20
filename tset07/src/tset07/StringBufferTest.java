@@ -18,11 +18,16 @@ public class StringBufferTest {
 		sb.append(" ");
 		sb.append("world");
 
-		System.out.println(sb.toString());
-		System.out.println(sb.capacity()); 			// 현재 문자열의 총 용량
-		System.out.println(sb.insert(11, "hi "));	// 원하는 위치에 문자열 삽입
-		System.out.println(sb.substring(0, 4));		// 문자열 자르기	
+		System.out.println("sb.toString() : " + sb.toString());
+		System.out.println("sb.capacity() : " + sb.capacity()); 			// 현재 문자열의 총 용량
+		System.out.println("sb.toString().getBytes().length : " + sb.toString().getBytes().length);
+		System.out.println("sb.insert(11,\"hi\") : " + sb.insert(11, "hi "));	// 원하는 위치에 문자열 삽입
+		System.out.println("sbsubstring(0, 4) : " + sb.substring(0, 4));		// 문자열 자르기	
+		System.out.println("sb.reverse() : " + sb.reverse());				//문자열 뒤집
 		
-		System.out.println(sb.toString().getBytes().length);
+		String str = sb.toString();	//StringBuufer를 String으로 변환 
+		System.out.println(str);
+		
+		
 	}
 }
