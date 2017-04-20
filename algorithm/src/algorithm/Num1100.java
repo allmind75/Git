@@ -34,7 +34,6 @@ public class Num1100 {
 
 				}
 			}
-			System.out.println(cnt);
 		}
 
 		System.out.println(cnt);
