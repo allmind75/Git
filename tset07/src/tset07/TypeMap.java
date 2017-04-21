@@ -19,27 +19,33 @@ public class TypeMap {
 		 * Map의 가장 큰 특징은 key value!
 		 */
 		
+		//HashMap<key, value>
 		HashMap<String, String> mapStarCraft = new HashMap<String, String>();
+		
+		//map.put(key, value) - map에 저
 		mapStarCraft.put("scv", "테란 일꾼");
 		mapStarCraft.put("probe", "프로토스 일꾼");
 		mapStarCraft.put("drone", "저그 일꾼");
 		mapStarCraft.put("bird", "시조새");
 				
-		//key값으로 value값 얻기
-		System.out.println(mapStarCraft.get("scv"));
-		System.out.println(mapStarCraft.get("probe"));
-		System.out.println(mapStarCraft.get("drone"));
+		//map.get(key) - key값으로 value값 얻기
+		System.out.println("mapStarCraft.get(\"scv\") : " + mapStarCraft.get("scv"));
+		System.out.println("mapStarCraft.get(\"probe\") : " + mapStarCraft.get("probe"));
+		System.out.println("mapStarCraft.get(\"drone\") : " + mapStarCraft.get("drone"));
 		System.out.println("");
 		
-		//map에 해당 key가 있는지 확인 후 결과값 boolean으로 리턴
+		//map.containsKey(key) - map에 해당 key가 있는지 확인 후 결과값 boolean으로 리턴
+		System.out.println("mapStarCraft.containsKey(scv) = " + mapStarCraft.containsKey("scv"));
 		System.out.println("mapStarCraft.containsKey(marine) = " + mapStarCraft.containsKey("marine"));
-		
-		//map에서 key값에 해당되는 아이템을 삭제후 그 value값을 리턴
+		System.out.println("");
+
+		//map.remove(key) - map에서 key값에 해당되는 아이템을 삭제후 그 value값을 리턴
 		//key 값에 해당하는 값이 없으면 null 리턴
 		System.out.println("mapStarCraft.remove(bird) : " + mapStarCraft.remove("bird"));
+		System.out.println("mapStarCraft.remove(dog) : " + mapStarCraft.remove("dog"));
+		System.out.println("");
 		
-		
-		//map의 갯수 리턴
+		//.size() - map의 갯수 리턴
 		System.out.println("mapStarCraft size() = " + mapStarCraft.size());
 	}
 }
