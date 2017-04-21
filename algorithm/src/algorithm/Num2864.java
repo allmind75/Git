@@ -4,41 +4,66 @@ import java.util.Scanner;
 
 public class Num2864 {
 
-	public static int max = 0;
-	public static int min = 9999999; 
-	
-	public static void minMax(int n) {
+	public static String minStr(String str) {
 		
-		if(n > max) {
-			max = n;
-		} else {
-			if(n < min) {
-				min = n;
+		char[] temp = str.toCharArray();
+		
+		for(int i=0 ; i<str.length() ; i++) {
+			
+			if(temp[i] == '6') {
+				temp[i] = '5';
 			}
 		}
+		
+		return String.valueOf(temp);
+	}
+	
+	public static String maxStr(String str) {
+		
+		char[] temp = str.toCharArray();
+		
+		for(int i=0 ; i<str.length() ; i++) {
+			
+			if(temp[i] == '5') {
+				temp[i] = '6';
+			}
+		}
+		
+		return String.valueOf(temp);
+	}
+	
+	public static int min(String str1, String str2) {
+		
+		int min;
+		
+		min = Integer.parseInt(str1) + Integer.parseInt(str2);
+		
+		return min;
+	}
+	
+	public static int max(String str1, String str2) {
+	
+		int max;
+		
+		max = Integer.parseInt(str1) + Integer.parseInt(str2);
+		
+		return max;
 	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String strN1, strN2;
-		char[] temp;
+		int min = 0, max = 0;
 		
 		Scanner sc = new Scanner(System.in);
 		
-		strN1 = sc.nextLine();
-		strN2 = sc.nextLine();
+		strN1 = sc.next();
+		strN2 = sc.next();
 		
-		for(int i=0 ; i<strN1.length() ; i++) {
-			
-			int sum;
-			
-			temp = strN1.toCharArray();
-			if(temp[i] == '5') {
-				temp[i] = '6';
-			}
-				
-
-		}
+		min = min(minStr(strN1), minStr(strN2));
+		max = max(maxStr(strN1), maxStr(strN2));
+		
+		System.out.println(min + " " + max);
 		
 		sc.close();
 	}
