@@ -1,6 +1,8 @@
 package tset07;
 
-
+/*
+ * https://blog.seotory.com/post/2016/03/java-singleton-pattern
+ */
 class Singleton {
 	
 	private static Singleton one;
