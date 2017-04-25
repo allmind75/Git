@@ -17,7 +17,10 @@ public class Num01 {
 
 		MemberInfo member1 = new MemberInfo();
 		MemberInfo member2 = new MemberInfo(2, "박명수", "과장", "대전광역시 중구");
-
+		MemberInfo member3 = new MemberInfo("정준하");
+		MemberInfo[] staff = new MemberInfo[]{new MemberInfo(), new MemberInfo()};
+		
+		
 		member1.memberNum = 1;
 		member1.name = "유재석";
 		member1.position = "대리";
@@ -26,33 +29,57 @@ public class Num01 {
 		member1.printInfo();
 		System.out.println();
 		member2.printInfo();
+		System.out.println();
+		member3.printInfo();
+		System.out.println();
 
+		for(MemberInfo m: staff) {
+			m.printInfo();
+		}
+		
 	}
 
 }
 
 class MemberInfo {
 
+	//클래스 변수
+	public static int memberCnt = 0;
+	
 	//field - 객체의 속성(정보)
 	int memberNum;
 	String name;
 	String position;
 	String address;
-
+	
 	
 	/*
 	 * 생성자(constructor) - 객체가 생성될때 실행되는 메소드
 	 * 1. 클래스 이름과 같음
 	 * 2. 반환값 없음
-	 * 3. 함수 오버로딩 가능
+	 * 3. 중복 정의 가능, 메소드 오버로딩 가능
 	 * 4. 생성자를 하나라도 제공하면 기본생성자 자동으로 생성 안됨! 
+	 * 5. 생성자는 리턴형이 없음
 	 */
 	
 	//기본 생성자
-	MemberInfo() {}
+	MemberInfo() {
+		this.memberNum = 0;
+		this.name = "없음";
+		this.position = "사원";
+		this.address = "없음";
+		MemberInfo.memberCnt++;
+	}
+	
+	//this 생성자 - 같은 클래스내의 다른 생성자 호출
+	MemberInfo(String name) {
+		this();
+		this.name = name;
+	}
 	
 	//오버로딩한 생성자
 	MemberInfo(int memberNum, String name, String position, String address) {
+		this();
 		this.memberNum = memberNum;
 		this.name = name;
 		this.position = position;
@@ -65,6 +92,7 @@ class MemberInfo {
 		System.out.println("이름 : " + this.name);
 		System.out.println("직위 : " + this.position);
 		System.out.println("거주지주소 : " + this.address);
+		System.out.println("직원 수 : " + MemberInfo.memberCnt);
 	}
 
 }
