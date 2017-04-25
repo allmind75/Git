@@ -11,9 +11,10 @@ public class TimeCalc {
 		 * 1ns * 1000000000 = 1s
 		 */
 		long start = System.nanoTime();
-		
-		for(int i=0 ; i<21000 ; i++) {
-			System.out.println(i);
+		double sum = 0;
+				
+		for(int i=0 ; i<2100000000 ; i++) {
+			sum += i;
 		}
 		
 		long end = System.nanoTime();
@@ -21,7 +22,7 @@ public class TimeCalc {
 		
 		
 		
-		System.out.println(time);
+		System.out.println(time + "ÃÊ");
 	}
 
 }
