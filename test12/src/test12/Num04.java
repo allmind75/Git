@@ -1,23 +1,57 @@
 package test12;
 
+import java.util.Scanner;
+
 public class Num04 {
 
 	public static void main(String[] args) {
 		
-		BookList[] bookList = new BookList[]{
-				new BookList("자바공부", "한빛미디어", "홍길동", 20000, 10),
-				new BookList("부자되기", "하늘과 바다", "유재석", 25000, 20),
-				new BookList("좋은 시간 관리", "한빛미디어", "강호동", 17000, 30),
-				new BookList("성공하기", "하늘과 바다", "유재석", 25000, 5)};
+		BookInfo[] bookList = new BookInfo[]{
+				new BookInfo("자바공부", "한빛미디어", "홍길동", 20000, 10),
+				new BookInfo("부자되기", "하늘과 바다", "유재석", 25000, 20),
+				new BookInfo("좋은 시간 관리", "한빛미디어", "강호동", 17000, 30),
+				new BookInfo("성공하기", "하늘과 바다", "유재석", 25000, 5)};
 		
-		for(BookList b: bookList) {
-			b.printBookInfo();
-			System.out.println();
+		BookStore bookStore = new BookStore(bookList);
+		boolean run = true;
+		Scanner sc = new Scanner(System.in);
+		
+		
+		System.out.println("==============================[Book Store]==============================");
+		while(run) {
+			
+			int choice;
+			String str;
+			
+			System.out.println("1.모든 도서 정보 출력" + "\t\t" + "2.도서명 검색" + "\t\t" + "3.출판사 검색" + "\t\t" + "4.저자 검색" + "\t\t" + "5.종료");
+			
+			choice = sc.nextInt();
+			sc.nextLine();
+			
+			switch(choice) {
+			case 1:
+				bookStore.printBookList();
+				break;
+			case 2:
+				System.out.println("");
+				break;
+			case 3:
+				 break;
+			case 4:
+				break;
+			case 5:
+				run =false;
+				System.out.println("프로그램종료");
+				break;
+			}
+			
 		}
+		
+		sc.close();
 	}
 }
 
-class BookList {
+class BookInfo {
 	
 	String name;
 	String publisher;
@@ -25,7 +59,7 @@ class BookList {
 	int price;
 	int stock;
 	
-	BookList(String name, String publisher, String author, int price, int stock) {
+	BookInfo(String name, String publisher, String author, int price, int stock) {
 		this.name = name;
 		this.publisher = publisher;
 		this.author = author;
@@ -41,19 +75,19 @@ class BookList {
 		System.out.println("재고수량 : " + this.stock);
 	}
 	
-	public String bookName() {
+	public String getBookName() {
 		return this.name;
 	}
 	
-	public String bookPublisher() {
+	public String getBookPublisher() {
 		return this.publisher;
 	}
 	
-	public String bookAuthor() {
+	public String getBookAuthor() {
 		return this.author;
 	}
 	
-	public int bookPrice() {
+	public int getBookPrice() {
 		return this.price;
 	}
 	
@@ -61,11 +95,59 @@ class BookList {
 		this.price = price;
 	}
 	
-	public int bookStock() {
+	public int getBookStock() {
 		return this.stock;
 	}
 	
 	public void bookStockChange(int stock) {
 		this.stock = stock;
+	}
+}
+
+class BookStore {
+	
+	BookInfo[] bookList; 
+	
+	BookStore(BookInfo[] bookList) {
+		this.bookList = bookList;
+	}
+	
+	public void printBookList() {
+		System.out.println("[모든 도서 정보 출력]");
+		System.out.println("도서명" +"\t\t" + "출판사" + "\t\t" + "저자" + "\t" + "판매가" + "\t" + "재고수량");
+		for(int i=0 ; i<bookList.length ; i++) {
+			System.out.println(bookList[i].name + "\t" + bookList[i].publisher + "\t" + bookList[i].author + "\t" + bookList[i].price
+					 + "\t" + bookList[i].stock);
+
+		}
+		System.out.println();
+		
+	}
+	
+	public void searchBookName(String name) {
+		
+		for(BookInfo b: bookList) {
+			if(b.getBookName().equals(name)) {
+				b.printBookInfo();
+			}
+		}
+	}
+	
+	public void searchBookPublisher(String publisher) {
+		
+		for(BookInfo b: bookList) {
+			if(b.getBookPublisher().equals(publisher)) {
+				b.printBookInfo();
+			}
+		}
+	}
+
+	public void searchBookAuthor(String Author) {
+		
+		for(BookInfo b: bookList) {
+			if(b.getBookAuthor().equals(Author)) {
+				b.printBookInfo();
+			}
+		}
 	}
 }
