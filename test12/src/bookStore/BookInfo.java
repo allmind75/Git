@@ -2,11 +2,11 @@ package bookStore;
 
 public class BookInfo {
 	
-	String name;
-	String publisher;
-	String author;
-	int price;
-	int stock;
+	private String name;
+	private String publisher;
+	private String author;
+	private int price;
+	private int stock;
 	
 	BookInfo(String name, String publisher, String author, int price, int stock) {
 		this.name = name;

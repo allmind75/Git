@@ -23,8 +23,8 @@ public class Main {
 			int choice;
 			String str;
 			
-			System.out.println("[1.모든 도서 정보 출력" + "\t" + "2.도서명 검색" + "\t" + "3.출판사 검색" + "\t" + "4.저자 검색" + "\t" + "5.종료]");
-			
+			System.out.println("\n[1.모든 도서 정보 출력" + "\t" + "2.도서명 검색" + "\t" + "3.출판사 검색" + "\t" + "4.저자 검색" + "\t" + "5.종료]");
+			System.out.print("메뉴 선택> ");
 			choice = sc.nextInt();
 			sc.nextLine();
 			
