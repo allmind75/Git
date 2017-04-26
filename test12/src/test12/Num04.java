@@ -17,13 +17,13 @@ public class Num04 {
 		Scanner sc = new Scanner(System.in);
 		
 		
-		System.out.println("==============================[Book Store]==============================");
+		System.out.println("[Book Store]");
 		while(run) {
 			
 			int choice;
 			String str;
 			
-			System.out.println("1.모든 도서 정보 출력" + "\t\t" + "2.도서명 검색" + "\t\t" + "3.출판사 검색" + "\t\t" + "4.저자 검색" + "\t\t" + "5.종료");
+			System.out.println("1.모든 도서 정보 출력" + "\t" + "2.도서명 검색" + "\t" + "3.출판사 검색" + "\t" + "4.저자 검색" + "\t" + "5.종료");
 			
 			choice = sc.nextInt();
 			sc.nextLine();
@@ -33,11 +33,19 @@ public class Num04 {
 				bookStore.printBookList();
 				break;
 			case 2:
-				System.out.println("");
+				System.out.print("도서명 입력> ");
+				str = sc.nextLine();
+				bookStore.searchBookName(str);
 				break;
 			case 3:
+				System.out.print("출판사 입력> ");
+				str = sc.nextLine();
+				bookStore.searchBookPublisher(str);
 				 break;
 			case 4:
+				System.out.print("저자 입력> ");
+				str = sc.nextLine();
+				bookStore.searchBookAuthor(str);
 				break;
 			case 5:
 				run =false;
@@ -91,7 +99,7 @@ class BookInfo {
 		return this.price;
 	}
 	
-	public void bookPriceChange(int price) {
+	public void setBookPrice(int price) {
 		this.price = price;
 	}
 	
@@ -99,7 +107,7 @@ class BookInfo {
 		return this.stock;
 	}
 	
-	public void bookStockChange(int stock) {
+	public void setBookStock(int stock) {
 		this.stock = stock;
 	}
 }
@@ -126,28 +134,51 @@ class BookStore {
 	
 	public void searchBookName(String name) {
 		
+		int cnt = 0;
 		for(BookInfo b: bookList) {
 			if(b.getBookName().equals(name)) {
 				b.printBookInfo();
+				System.out.println();
+				cnt++;
 			}
+		}
+		
+		if(cnt == 0) {
+			System.out.println("찾는 도서명이 없습니다.");
 		}
 	}
 	
 	public void searchBookPublisher(String publisher) {
 		
+		int cnt = 0;
+		
 		for(BookInfo b: bookList) {
 			if(b.getBookPublisher().equals(publisher)) {
 				b.printBookInfo();
-			}
+				System.out.println();
+				cnt++;
+			}	
+		}
+		
+		if(cnt == 0) {
+			System.out.println("찾는 출판사가 없습니다.");
 		}
 	}
 
 	public void searchBookAuthor(String Author) {
 		
+		int cnt = 0;
+		
 		for(BookInfo b: bookList) {
 			if(b.getBookAuthor().equals(Author)) {
 				b.printBookInfo();
+				System.out.println();
+				cnt++;
 			}
+		}
+		
+		if(cnt == 0) {
+			System.out.println("찾는 저자가 없습니다.");
 		}
 	}
 }
