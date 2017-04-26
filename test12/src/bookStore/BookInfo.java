@@ -21,31 +21,31 @@ public class BookInfo {
 				 + "\t" + this.stock);
 	}
 	
-	public String getBookName() {
+	public String getName() {
 		return this.name;
 	}
 	
-	public String getBookPublisher() {
+	public String getPublisher() {
 		return this.publisher;
 	}
 	
-	public String getBookAuthor() {
+	public String getAuthor() {
 		return this.author;
 	}
 	
-	public int getBookPrice() {
+	public int getPrice() {
 		return this.price;
 	}
 	
-	public void setBookPrice(int price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	
-	public int getBookStock() {
+	public int getStock() {
 		return this.stock;
 	}
 	
-	public void setBookStock(int stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 }

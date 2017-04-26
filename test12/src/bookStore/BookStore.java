@@ -10,7 +10,7 @@ public class BookStore {
 	
 	public void printBookList() {
 
-		System.out.println("[모든 도서 정보 출력]");
+		System.out.println("\t\t[모든 도서 정보 출력]");
 		printTitle();
 		for(int i=0 ; i<bookList.length ; i++) {
 			bookList[i].printBookInfo();
@@ -25,7 +25,7 @@ public class BookStore {
 		
 		
 		for(BookInfo b: bookList) {
-			if(b.getBookName().equals(name)) {
+			if(b.getName().equals(name)) {
 				if(cnt == 0) {
 					printTitle();
 				}
@@ -44,7 +44,7 @@ public class BookStore {
 		int cnt = 0;
 		
 		for(BookInfo b: bookList) {
-			if(b.getBookPublisher().equals(publisher)) {
+			if(b.getPublisher().equals(publisher)) {
 				if(cnt == 0) {
 					printTitle();
 				}
@@ -63,7 +63,7 @@ public class BookStore {
 		int cnt = 0;
 		
 		for(BookInfo b: bookList) {
-			if(b.getBookAuthor().equals(Author)) {
+			if(b.getAuthor().equals(Author)) {
 				if(cnt == 0) {
 					printTitle();
 				}
