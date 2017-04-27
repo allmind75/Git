@@ -1,7 +1,9 @@
 package tset07;
 
 import java.util.HashMap;
-
+/*
+ * http://www.java2s.com/Code/Java/Collections-Data-Structure/GetakeyfromvaluewithanHashMap.htm
+ */
 public class MapGetKeyFromeValue {
 
 	public static void main(String[] args) {

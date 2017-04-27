@@ -21,10 +21,9 @@ public class Main {
 			int menu;
 
 			System.out.print("제품선택] ");
-			vMachine.printDrink();
+			vMachine.printDrink();	//제품선택 메뉴 출력
 
-			menu = sc.nextInt();
-			sc.nextLine();
+			menu = sc.nextInt();	//제품번호 입력
 
 			switch (menu) {
 			case 1:
@@ -58,12 +57,12 @@ public class Main {
 		int money;
 		int change;
 
-		vMachine.printChoice(menu);
-		money = sc.nextInt();
-		sc.nextLine();
+		vMachine.printChoice(menu);	//선택한 제품 출력
+		
+		money = sc.nextInt();	//금액 투입
 
-		change = vMachine.getChange(menu, money);
+		change = vMachine.getChange(menu, money);	//잔돈반환
 
-		vMachine.printChange(menu, change);
+		vMachine.printChange(menu, change);		//잔돈 또는 금액부족 출력
 	}
 }
