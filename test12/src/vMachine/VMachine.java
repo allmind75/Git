@@ -4,7 +4,7 @@ public class VMachine {
 
 	private Drink[] drink;
 	
-	VMachine(Drink[] drink) {
+	public VMachine(Drink[] drink) {
 		this.drink = drink;
 	}
 	
@@ -17,14 +17,14 @@ public class VMachine {
 	}
 	
 	public void printChoice(int num) {
-		System.out.println("[" + this.getNameByNum(num) + "구매를 선택 하셨습니다. 판매 가격은 " + this.getPriceByNum(num) + "입니다.]");
+		System.out.println("[" + this.getNameByNum(num) + "구매를 선택 하셨습니다. 판매 가격은 " + this.getPriceByNum(num) + "원 입니다.]");
 		System.out.print("금액 투입 : ");
 	}
 	
 	public void printChange(int num, int change) {
 		
-		if (change == -1) {
-			System.out.println("투입 금액이 판매가격보다 적습니다.");
+		if (change < 0) {
+			System.out.println("투입 금액이 판매가격보다 " + (-change) +  "원 적습니다.");
 		} else {
 			System.out.println(this.getNameByNum(num) + "을 구매하셨습니다. 판매 잔금 " + change + "원을 회수 하세요.");
 		}
@@ -33,12 +33,7 @@ public class VMachine {
 		
 	public int getChange(int num, int money) {
 		
-		int price = this.getPriceByNum(num);
-		if(price > money) {
-			return -1;
-		} else {
-			return (money - price);
-		}
+		return money -  this.getPriceByNum(num);
 		
 	}
 	
