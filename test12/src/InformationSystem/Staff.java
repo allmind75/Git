@@ -27,9 +27,10 @@ public class Staff extends PersonInfo{
 		this.position = position;
 	}
 	
+	@Override
 	public void print() {
-		System.out.println(super.getName() + "\t" + super.getAddress() + "\t" + this.division + 
-				"\t" + this.position);
+		super.print();
+		System.out.println("\t" + this.division + "\t" + this.position);
 	}
 }
 

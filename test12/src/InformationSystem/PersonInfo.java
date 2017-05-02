@@ -22,7 +22,11 @@ public class PersonInfo {
 		this.name = name;
 	}
 	
-	public void setAddress(String addresss) {
+	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public void print() {
+		System.out.print(this.name + "\t" + this.address);
 	}
 }

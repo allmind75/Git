@@ -37,9 +37,10 @@ public class Student extends PersonInfo{
 		this.major = major;
 	}
 	
+	@Override
 	public void print() {
-		System.out.println(super.getName() + "\t" + super.getAddress() + "\t\t" + this.stdNum + 
-				"\t" + this.grade + "\t" + this.major);
+		super.print();
+		System.out.println("\t\t" + this.stdNum + "\t" + this.grade + "\t" + this.major);
 	}
 	
 }
