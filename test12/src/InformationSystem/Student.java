@@ -38,7 +38,7 @@ public class Student extends PersonInfo{
 	}
 	
 	public void print() {
-		System.out.println(super.getName() + "\t" + super.getAddress() + "\t" + this.stdNum + 
+		System.out.println(super.getName() + "\t" + super.getAddress() + "\t\t" + this.stdNum + 
 				"\t" + this.grade + "\t" + this.major);
 	}
 	

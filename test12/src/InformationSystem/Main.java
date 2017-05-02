@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Student[] student = new Student[]{
-				new Student("홍길동", "대전광역시", "1234-567890", 2,"경제"),
+				new Student("홍길동", "대전시", "1234-567890", 2,"경제"),
 				new Student("유재석", "세종시", "1234-123456", 1, "컴퓨터")};
 		
 		Staff[] staff = new Staff[]{
@@ -39,7 +39,7 @@ public class Main {
 	
 	public static void studentsPrint(Student[] student) {
 		
-		System.out.println("이름\t" + "주소\t" + "학번\t\t" + "학년\t" + "전공\t");
+		System.out.println("이름\t" + "주소\t\t" + "학번\t\t" + "학년\t" + "전공\t");
 		for(Student s: student) {
 			s.print();
 		}	
