@@ -6,6 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+
 		Student[] student = new Student[]{
 				new Student("홍길동", "대전광역시", "1234-567890", 2,"경제"),
 				new Student("유재석", "세종시", "1234-123456", 1, "컴퓨터")};
