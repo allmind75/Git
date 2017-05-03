@@ -5,31 +5,15 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		
 
 		Student[] student = new Student[]{
-				new Student("홍길동", "대전시", "1234-567890", 2,"경제"),
+				new Student("홍길동", "대전광역시", "1234-567890", 2,"경제"),
 				new Student("유재석", "세종시", "1234-123456", 1, "컴퓨터")};
 		
 		Staff[] staff = new Staff[]{
 				new Staff("하하", "서울", "교무부", "대리"),
 				new Staff("박명수", "인천", "행정", "과장")};
-		
-		PersonInfo[] personInfo = new PersonInfo[student.length + staff.length];
-		
-		for(int i=0 ; i<student.length + staff.length ; i++) {
-			
-			if(i<student.length) {
-				personInfo[i] = student[i];
-			} else {
-				personInfo[i] = staff[i-student.length];
-			}
-		}
-		
-		//전체 출력
-		print(personInfo);
-		System.out.println();
-		
+				
 		Scanner sc = new Scanner(System.in);
 		String input;
 		
@@ -53,17 +37,9 @@ public class Main {
 		
 	}
 	
-	
-	public static void print(PersonInfo[] personInfo) {
-		
-		for(PersonInfo p :personInfo) {
-			p.print();
-		}
-	}
-	
 	public static void studentsPrint(Student[] student) {
 		
-		System.out.println("이름\t" + "주소\t\t" + "학번\t\t" + "학년\t" + "전공\t");
+		System.out.println("이름\t" + "주소\t" + "학번\t\t" + "학년\t" + "전공\t");
 		for(Student s: student) {
 			s.print();
 		}	
