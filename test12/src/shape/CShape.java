@@ -12,6 +12,10 @@ public class CShape {
 		return this.name;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public double areaCalc() {
 		return 0;
 	}	

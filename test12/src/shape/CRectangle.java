@@ -20,4 +20,37 @@ public class CRectangle extends CShape{
 		return this.width * this.height;
 	}
 
+	public int getxPoint() {
+		return xPoint;
+	}
+
+	public void setxPoint(int xPoint) {
+		this.xPoint = xPoint;
+	}
+
+	public int getyPoint() {
+		return yPoint;
+	}
+
+	public void setyPoint(int yPoint) {
+		this.yPoint = yPoint;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
+	
+	
 }

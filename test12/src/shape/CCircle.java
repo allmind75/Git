@@ -17,5 +17,31 @@ public class CCircle extends CShape{
 	public double areaCalc() {
 		return Math.PI * Math.pow(this.radius, 2);
 	}
+
+	public int getxPoint() {
+		return xPoint;
+	}
+
+	public void setxPoint(int xPoint) {
+		this.xPoint = xPoint;
+	}
+
+	public int getyPoint() {
+		return yPoint;
+	}
+
+	public void setyPoint(int yPoint) {
+		this.yPoint = yPoint;
+	}
+
+	public double getRadius() {
+		return radius;
+	}
+
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+	
+	
 	
 }
