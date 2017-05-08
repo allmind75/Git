@@ -11,12 +11,14 @@ public class Main {
 				new CRectangle("왼쪽 사각형", 10, 200, 100, 50),
 				new CRectangle("오른쪽 사각형", 100, 250, 90, 45)};
 		
-		System.out.println("도형 목록");	
+		System.out.println("[도형 목록]");	
 		for(CShape s: shapes) {
 			System.out.println("이름 : " + s.getName());
 		}
 		
-		System.out.println("도형 넓이");	
+		System.out.println();
+		
+		System.out.println("[도형 넓이]");	
 		for(CShape s: shapes) {
 			System.out.println(s.getName()+ "의 넓이 : " + s.areaCalc());
 		}
