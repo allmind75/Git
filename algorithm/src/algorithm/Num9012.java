@@ -2,7 +2,6 @@ package algorithm;
 
 import java.util.EmptyStackException;
 import java.util.Scanner;
-import java.util.Scanner;
 import java.util.Stack;
 
 public class Num9012 {
