@@ -7,14 +7,13 @@ import javax.swing.JFrame;
 public class Main extends JFrame{
 	
 	Shape[] shape = new Shape[]{ new Circle("원", 100, 100, 15)
-			,new Rect("사각형", 300, 300, 50, 50)};
+			,new Rect("사각형", 300, 300, 50, 50)
+			,new Triangle("삼각형", 100, 50, 10, 200, 300, 200)};
 		
 	public Main() {
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(500, 500);
+		setSize(800, 800);
 		setVisible(true);
-		setLocation(100, 100);
 		setTitle("도형그리기");
 	}
 	
