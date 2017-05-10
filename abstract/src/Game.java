@@ -1,10 +1,19 @@
 
 public class Game {
 
+	Monster[] monster = new Monster[]{new Orc(), new Elf()};
+
+	public void attack() {
+		
+		for(Monster m: monster) {
+			m.attack();
+		}
+	}
 	public static void main(String[] args) {
 		
-		Monster monster = new Orc();
+		Game game = new Game();
 		
-		monster.attack();
+		game.attack();
+		
 	}
 }
