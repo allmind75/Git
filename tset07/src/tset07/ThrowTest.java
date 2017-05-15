@@ -9,6 +9,9 @@ package tset07;
 
 class NameException extends Exception {
 
+	NameException() {
+		super("[NameException]");
+	}
 }
 
 public class ThrowTest {
@@ -60,6 +63,10 @@ public class ThrowTest {
 		} catch (NameException e) {
 			
 			System.out.println("main() NameException ¹ß»ý : " + e);
+		
+		} finally { 
+			
+			System.out.println("[finally]");
 		}
 	}
 }
