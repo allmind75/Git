@@ -12,15 +12,17 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		JFrame frame = new JFrame();
+		
+		//Image
 		Toolkit toolkit = frame.getToolkit();
-		Image image = toolkit.createImage("src/icon.jpg");
+		Image image = toolkit.createImage("res/icon.jpg");
 		
 		frame.setSize(500, 500);
 		frame.setVisible(true);
 		frame.setTitle("Swing Test");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		frame.setIconImage(image);
+		frame.setIconImage(image);	//icon image º¯°æ
 	}
 
 }
