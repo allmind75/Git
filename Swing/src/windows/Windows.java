@@ -1,5 +1,6 @@
 package windows;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -7,13 +8,27 @@ import javax.swing.JFrame;
 
 public class Windows extends JFrame{
 
+	Button button = new Button("btn");
+	
 	public Windows() {
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame size
 		setSize(500, 500);
+		
+		//frame 보이기
 		setVisible(true);
+		
+		//frame 위치
 		setLocation(100, 100);
+		
+		//frame 제목
 		setTitle("스윙프로그램");
+		
+		//x버튼 클릭시 종료
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//frmae
+		add(button);
 	}
 	
 	public static void main(String[] args) {
