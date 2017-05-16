@@ -27,6 +27,7 @@ public class FileOutputTest {
 		}
 	}
 	
+	//4자리 정수 랜덤 생성
 	public static int createNumbers() {
 		
 		int numbers = (int)(Math.random()*9999) + 1;
@@ -36,7 +37,7 @@ public class FileOutputTest {
 		return numbers;
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 
 		try {	
