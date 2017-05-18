@@ -1,16 +1,18 @@
 package windows;
 
-import java.awt.Event;
+import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
 public class JMenuBarTest extends JFrame{
@@ -21,12 +23,33 @@ public class JMenuBarTest extends JFrame{
 		super.setTitle("JMenuBar Test");
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+		super.setLayout(new BorderLayout());
 		
 		addMenubar();
+		addToolBar();
 		
 		super.setVisible(true);
 		
 	}
+	
+	
+	public void addToolBar() {
+	
+		//ImageIcon 추가
+		ImageIcon ic_1 = new ImageIcon("res/sana.jpg");
+		
+		//ImgageIcon 크기 변경
+		Image img = ic_1.getImage().getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon sana = new ImageIcon(img);
+		
+		JToolBar toolBar = new JToolBar();
+		JButton btn1 = new JButton("Sana", sana);
+		
+		
+		toolBar.add(btn1);
+		super.add(toolBar, "North");
+	}
+	
 	
 	public void addMenubar() {
 		
@@ -83,7 +106,7 @@ public class JMenuBarTest extends JFrame{
 		super.setJMenuBar(menuBar);;
 		
 	}
-	
+
 	public void addMenuItem(JMenu menu, JMenuItem[] item) {
 		
 		for(int i=0 ; i<item.length ; i++) {
