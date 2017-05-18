@@ -17,6 +17,9 @@ import javax.swing.KeyStroke;
 
 public class JMenuBarTest extends JFrame{
 
+	
+	
+	
 	public JMenuBarTest() {
 		
 		super.setSize(300, 500);
