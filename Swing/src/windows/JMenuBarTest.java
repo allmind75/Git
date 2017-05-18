@@ -1,13 +1,17 @@
 package windows;
 
-import java.awt.Color;
+import java.awt.Event;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
 public class JMenuBarTest extends JFrame{
 
@@ -28,22 +32,42 @@ public class JMenuBarTest extends JFrame{
 		
 		JMenuBar menuBar = new JMenuBar();		//menuBar
 		
-		JMenu file = new JMenu("파일");			//menu
-		JMenu edit = new JMenu("편집");			//menu
-		JMenu help = new JMenu("도움말");			//menu
+		JMenu[] menu = new JMenu[]{new JMenu("파일(F)"), new JMenu("편집(E)"), new JMenu("도움말(H)")};
 		
-		JMenuItem[] item_file = new JMenuItem[]{new JMenuItem("새로만들기"), new JMenuItem("열기..."), new JMenuItem("저장"),new JMenuItem("끝내기")};
+		//ImageIcon 추가
+		ImageIcon ic_1 = new ImageIcon("res/sana.jpg");
+		
+		//ImgageIcon 크기 변경
+		Image img = ic_1.getImage().getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon sana = new ImageIcon(img);
+		
+		JMenuItem[] item_file = new JMenuItem[]{new JMenuItem("새로만들기", sana), new JMenuItem("열기..."), new JMenuItem("저장"),new JMenuItem("끝내기")};
 		JMenuItem[] item_edit = new JMenuItem[]{new JMenuItem("실행취소"), new JMenuItem("복사하기"), new JMenuItem("잘라내기"),new JMenuItem("붙여넣기")};
-		JMenuItem[] item_help = new JMenuItem[]{new JMenuItem("도와줄까?"), new JMenuItem("말까?")};
+		JMenuItem[] item_help = new JMenuItem[]{new JMenuItem("도와줄까?"), new JMenuItem("말까?"), new JMenuItem("Randon Help !")};
 		
-		menuBar.add(file);
-		menuBar.add(edit);
-		menuBar.add(help);
 		
-		addMenuItem(file, item_file);
-		addMenuItem(edit, item_edit);
-		addMenuItem(help, item_help);
+		
+		for(int i=0 ; i<menu.length ; i++) {
+			
+			menuBar.add(menu[i]);
+		}
+
+		
+		addMenuItem(menu[0], item_file);
+		addMenuItem(menu[1], item_edit);
+		addMenuItem(menu[2], item_help);
+		
+		
+		//단축키 설정
+		menu[0].setMnemonic(KeyEvent.VK_F);
+		menu[1].setMnemonic(KeyEvent.VK_E);
+		menu[2].setMnemonic(KeyEvent.VK_H);
 				
+		//메뉴 선택하지 않은 상태에서, 메뉴 아이템 선택하는 방법
+		item_file[item_file.length-1].setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+
+		
+		
 		//button select
 		item_file[item_file.length-1].addActionListener(new ActionListener() {
 			
