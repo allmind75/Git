@@ -95,14 +95,24 @@ public class JMenuBarTest extends JFrame{
 		
 		
 		//button select
-		item_file[item_file.length-1].addActionListener(new ActionListener() {
+//		item_file[item_file.length-1].addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				System.exit(0);
+//			}
+//		});
+		
+		
+		item_file[item_file.length-1].addActionListener((ActionEvent e)->{
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
+
 				// TODO Auto-generated method stub
 				System.exit(0);
-			}
+			
 		});
+		
 		
 		//menuBar.setBackground();
 		
