@@ -138,7 +138,7 @@ public class ActionListnerTest extends JFrame implements ActionListener, Runnabl
 
 	public ActionListnerTest() {
 
-		super.setSize(500, 500);
+		super.setSize(360, 680);
 		super.setTitle("ActionListner Test");
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		super.setLayout(new FlowLayout());
