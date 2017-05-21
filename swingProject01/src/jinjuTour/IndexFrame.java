@@ -2,7 +2,9 @@ package jinjuTour;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -10,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
@@ -71,6 +74,10 @@ public class IndexFrame extends JFrame {
 			}
 		}
 		
+
+		
+		menuItem[6].addActionListener((ActionEvent e) -> { System.exit(0); });
+		
 		super.setJMenuBar(menuBar);
 	}
 	
@@ -106,15 +113,28 @@ public class IndexFrame extends JFrame {
 	
 	public void addMainContent() {
 		
-		JPanel mainContentPanel = new JPanel();
-		ImageIcon ic_main = new ImageIcon("res/mainContent.jpg");
+		JPanel mainVisualPanel = new JPanel();
+		JPanel mainContentPanel = new JPanel(new GridLayout(0, 2,10, 10));
+		
+		ImageIcon ic_main = new ImageIcon("res/main_visual.jpg");
+		ImageIcon ic_cont1 = new ImageIcon("res/main_cont_01.jpg");
+		ImageIcon ic_cont2 = new ImageIcon("res/main_cont_02.jpg");
+		
 		JLabel mainLabel = new JLabel(resizeImage(ic_main, 360, 224));
+		JLabel cont1Label = new JLabel(ic_cont1);
+		JLabel cont2Label = new JLabel(ic_cont2);
 		
-		mainContentPanel.add(mainLabel);
+		mainContentPanel.setBackground(Color.white);
 		
-		recomandPanel.add(mainContentPanel, "North");
+		mainVisualPanel.add(mainLabel);
+		mainContentPanel.add(cont1Label);
+		mainContentPanel.add(cont2Label);
+		
+		recomandPanel.add(mainVisualPanel, "North");
+		recomandPanel.add(mainContentPanel, "Center");
 		
 	}
+	
 	
 	public void addFooter() {
 		
