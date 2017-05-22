@@ -1,4 +1,4 @@
-package jinjuTour;
+package app;
 
 public class Main {
 
