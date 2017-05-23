@@ -10,15 +10,15 @@ import javax.swing.JPanel;
 import common.Common;
 import common.Footer;
 
-public class Product extends Common {
+public class Product extends JPanel {
 
-	private JPanel productPanel, productContentPanel;
+	private JPanel productContentPanel;
 	private JButton btn_product_01, btn_product_02, btn_product_03;
 	
 	public Product() {
 		
-		productPanel = new JPanel(new BorderLayout());
-		
+		super.setLayout(new BorderLayout());
+		addProductContent();
 	}
 	
 	public void addProductContent() {
@@ -33,16 +33,8 @@ public class Product extends Common {
 		productContentPanel.add(btn_product_02);
 		productContentPanel.add(btn_product_03);
 		
-		productPanel.add(productContentPanel, "Center");
-		productPanel.add(new Footer(), "South");
-	}
-
-	public JPanel getProductPanel() {
-		return productPanel;
-	}
-
-	public void setTripPanel(JPanel productPanel) {
-		this.productPanel = productPanel;
+		super.add(productContentPanel, "Center");
+		super.add(new Footer(), "South");
 	}
 	
 }

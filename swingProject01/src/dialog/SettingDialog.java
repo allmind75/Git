@@ -18,6 +18,7 @@ public class SettingDialog extends JDialog {
 	
 	private final int DIALOG_WIDTH = 200;
 	private final int DIALOG_HEIGHT = 300;
+	private final String TITLE = "¼³Á¤";
 	
 	private JPanel p1, p2;
 	private JCheckBox box1, box2, box3, box4;
@@ -31,6 +32,8 @@ public class SettingDialog extends JDialog {
 		super.setLocationRelativeTo(frame);
 		super.setResizable(false);
 		super.setLayout(new BorderLayout());
+		super.setIconImage(Common.ICON_IMG);
+		super.setTitle(TITLE);
 		
 		addPanel();
 		addCheckBox();
@@ -78,6 +81,11 @@ public class SettingDialog extends JDialog {
 		
 		btnSave.setFont(Common.fontStyle(Font.BOLD, 14));
 		btnCancel.setFont(Common.fontStyle(Font.BOLD, 14));
+		
+		btnSave.addActionListener((ActionEvent e) -> {
+		
+			super.dispose();
+		});
 		
 		btnCancel.addActionListener((ActionEvent e) -> {super.dispose();});
 		

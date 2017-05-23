@@ -2,11 +2,11 @@ package recomand;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -15,14 +15,15 @@ import common.Footer;
 
 public class Recomand extends JPanel {
 
-	private JPanel panelRecomand, panelMainVisual, panelMainContent;
+	private JPanel panelMainVisual, panelMainContent;
 	private JLabel labelMain;
 	private JButton btnCont_01, btnCont_02;
 	private ImageIcon ic_main, ic_cont1, ic_cont2;
 	
 	public Recomand() {
-		//panelRecomand = new JPanel(new BorderLayout());
+		
 		super.setLayout(new BorderLayout());
+		addMainContent();
 		
 	}
 	
@@ -45,20 +46,9 @@ public class Recomand extends JPanel {
 		panelMainContent.add(btnCont_01);
 		panelMainContent.add(btnCont_02);
 		
-		super.add(panelMainVisual, "North");
-		super.add(panelMainContent, "Center");
-		super.add(new Footer() , "South");
+		add(panelMainVisual, "North");
+		add(panelMainContent, "Center");
+		add(new Footer() , "South");
 		
 	}
-
-	public JPanel getRecomandPanel() {
-		return panelRecomand;
-	}
-
-	public void setRecomandPanel(JPanel panelRecomand) {
-		this.panelRecomand = panelRecomand;
-	}
-	
-	
-
 }

@@ -15,10 +15,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import common.Common;
+
 public class LoginDialog extends JDialog {
 	
 	private final int DIALOG_WIDTH = 300;
 	private final int DIALOG_HEIGHT = 150;
+	private final String TITLE = "·Î±×ÀÎ";
 	
 	private JPanel p1, p2;
 	private JLabel labelID, labelPW;
@@ -34,6 +37,8 @@ public class LoginDialog extends JDialog {
 		super.setLocationRelativeTo(frame);
 		super.setResizable(false);
 		super.setLayout(new BorderLayout());
+		super.setIconImage(Common.ICON_IMG);
+		super.setTitle(TITLE);
 		
 		addPanel();
 		addTextField();
@@ -45,11 +50,8 @@ public class LoginDialog extends JDialog {
 	
 	public void addPanel() {
 		
-		p1 = new JPanel();
-		p2 = new JPanel();
-		
-		p1.setLayout(new GridLayout(2, 2, 10, 10));
-		p2.setLayout(new FlowLayout());
+		p1 = new JPanel(new GridLayout(2, 2, 10, 10));
+		p2 = new JPanel(new FlowLayout());
 		
 		super.add(p1, "Center");
 		super.add(p2, "South");

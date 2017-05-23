@@ -11,12 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import common.Common;
 import dialog.LoginDialog;
+import dialog.RegDialog;
 import dialog.SettingDialog;
 import food.Food;
 import product.Product;
@@ -28,16 +29,10 @@ public class IndexFrame extends JFrame {
 	private static final int SCREEN_Width = 360;
 	private static final int SCREEN_HEIGHT = 680;
 	private static final String TITLE = "진주투어";
-	private static final Image ICON_IMG = java.awt.Toolkit.getDefaultToolkit().getImage("res/ic_launcher_16.png");
 
 	private JTabbedPane tab;
 	private ImageIcon ic_user, ic_home, ic_user_plus, ic_login, ic_notice, ic_help, ic_setting, ic_exit;
 	
-	private Recomand tabRecomand;
-	private Trip tabTrip;
-	private Food tabFood;
-	private Product tabProduct;
-
 	public IndexFrame() {
 
 		// IndexFrame reset
@@ -45,13 +40,10 @@ public class IndexFrame extends JFrame {
 		super.setTitle(TITLE);
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		super.setLocationRelativeTo(null);
-		super.setIconImage(ICON_IMG);
+		super.setIconImage(Common.ICON_IMG);
 		super.setResizable(false); // 화면 크기변경 X
 
-		//객체 생성
-		tabTrip = new Trip();
-		tabFood = new Food();
-		tabProduct = new Product();
+	
 
 		// Menu
 		addMenu();
@@ -102,15 +94,19 @@ public class IndexFrame extends JFrame {
 		// Mnemonic
 		menu.setMnemonic(KeyEvent.VK_M);
 
-		// actionListener
+		// MenuItem ActionListener
 		menuItem[1].addActionListener((ActionEvent e) -> {
 			tab.setSelectedIndex(0);
+		});
+		
+		menuItem[2].addActionListener((ActionEvent e) -> {
+		
+			RegDialog regDialog = new RegDialog(this);
 		});
 		
 		menuItem[3].addActionListener((ActionEvent e) -> {
 			
 			LoginDialog loginDialog = new LoginDialog(this);
-			
 		});
 		
 		
@@ -133,18 +129,17 @@ public class IndexFrame extends JFrame {
 
 		tab.setFont(Common.TAB_FONT);
 
+		tab.setBackground(new Color(3, 195, 199));
+		tab.setForeground(Color.white);
+		
+
+		
 		tab.add("추천", new Recomand());
-		tab.add("관광지", tabTrip.getTripPanel());
-		tab.add("맛집", tabFood.getFoodPanel());
-		tab.add("특산물", tabProduct.getProductPanel());
+		tab.add("관광지", new Trip());
+		tab.add("맛집", new Food());
+		tab.add("특산물", new Product());
 
 		super.add(tab);
-		
-		//tab
-		//tabRecomand.addMainContent();
-		tabTrip.addTripContent();
-		tabFood.addFoodContent();
-		tabProduct.addProductContent();
 
 	}
 }

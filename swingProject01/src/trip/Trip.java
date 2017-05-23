@@ -10,15 +10,15 @@ import javax.swing.JPanel;
 import common.Common;
 import common.Footer;
 
-public class Trip extends Common {
+public class Trip extends JPanel {
 
-	private JPanel panelTrip, panelTripContent;
+	private JPanel panelTripContent;
 	private JButton btnTrip_01, btnTrip_02, btnTrip_03;
 	
 	public Trip() {
 		
-		panelTrip = new JPanel(new BorderLayout());
-		
+		super.setLayout(new BorderLayout());
+		addTripContent();
 	}
 	
 	public void addTripContent() {
@@ -33,17 +33,7 @@ public class Trip extends Common {
 		panelTripContent.add(btnTrip_02);
 		panelTripContent.add(btnTrip_03);
 		
-		panelTrip.add(panelTripContent, "Center");
-		panelTrip.add(new Footer(), "South");
-	}
-
-	public JPanel getTripPanel() {
-		return panelTrip;
-	}
-
-	public void setTripPanel(JPanel tripPanel) {
-		this.panelTrip = tripPanel;
-	}
-	
-	
+		super.add(panelTripContent, "Center");
+		super.add(new Footer(), "South");
+	}	
 }

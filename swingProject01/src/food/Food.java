@@ -10,15 +10,15 @@ import javax.swing.JPanel;
 import common.Common;
 import common.Footer;
 
-public class Food extends Common {
+public class Food extends JPanel {
 	
-	private JPanel panelFood, panelFoodContent;
+	private JPanel panelFoodContent;
 	private JButton btnFood_01, btnFood_02, btnFood_03;
 	
 	public Food() {
 		
-		panelFood = new JPanel(new BorderLayout());
-		
+		super.setLayout(new BorderLayout());
+		addFoodContent();
 	}
 	
 	public void addFoodContent() {
@@ -33,17 +33,7 @@ public class Food extends Common {
 		panelFoodContent.add(btnFood_02);
 		panelFoodContent.add(btnFood_03);
 		
-		panelFood.add(panelFoodContent, "Center");
-		panelFood.add(new Footer(), "South");
+		super.add(panelFoodContent, "Center");
+		super.add(new Footer(), "South");
 	}
-
-	public JPanel getFoodPanel() {
-		return panelFood;
-	}
-
-	public void setFoodPanel(JPanel panelFood) {
-		this.panelFood = panelFood;
-	}
-	
-
 }
