@@ -2,7 +2,6 @@ package app;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -13,7 +12,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 
 import common.Common;
 import dialog.LoginDialog;
@@ -26,15 +24,18 @@ import trip.Trip;
 
 public class IndexFrame extends JFrame {
 
-	private static final int SCREEN_Width = 360;
-	private static final int SCREEN_HEIGHT = 680;
-	private static final String TITLE = "진주투어";
+	private final int SCREEN_Width = 360;
+	private final int SCREEN_HEIGHT = 680;
+	private final String TITLE = "진주투어";
 
 	private JTabbedPane tab;
 	private ImageIcon ic_user, ic_home, ic_user_plus, ic_login, ic_notice, ic_help, ic_setting, ic_exit;
 	
 	public IndexFrame() {
 
+		//loading
+		super.add(new LoadingPanel());
+		
 		// IndexFrame reset
 		super.setSize(SCREEN_Width, SCREEN_HEIGHT);
 		super.setTitle(TITLE);
@@ -43,7 +44,7 @@ public class IndexFrame extends JFrame {
 		super.setIconImage(Common.ICON_IMG);
 		super.setResizable(false); // 화면 크기변경 X
 
-	
+		
 
 		// Menu
 		addMenu();
@@ -54,6 +55,7 @@ public class IndexFrame extends JFrame {
 
 
 		super.setVisible(true);
+		
 	}
 
 	public void addMenu() {

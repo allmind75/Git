@@ -1,7 +1,9 @@
 package common;
 
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Image;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 
@@ -21,11 +23,18 @@ public class Common {
 		return resizeImageIcon;
 	}
 	
-	
 	public static final Font fontStyle(int fontWeight, int fontSize) {
 		
 		Font font = new Font("³ª´®°íµñ", fontWeight, fontSize);
 		return font;
+	}
+	
+	public static void openWebpage(String url) {
+	    try {
+	        Desktop.getDesktop().browse(new URL(url).toURI());
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 	
 }
