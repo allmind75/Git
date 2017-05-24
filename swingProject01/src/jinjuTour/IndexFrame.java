@@ -76,7 +76,8 @@ public class IndexFrame extends JFrame {
 		
 
 		
-		menuItem[6].addActionListener((ActionEvent e) -> { System.exit(0); });
+		menuItem[6].addActionListener((ActionEvent e) -> { System.exit(0);
+		});
 		
 		super.setJMenuBar(menuBar);
 	}
