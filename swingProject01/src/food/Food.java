@@ -7,7 +7,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import common.Common;
 import common.Footer;
 
 public class Food extends JPanel {
