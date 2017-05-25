@@ -19,11 +19,11 @@ import common.Common;
 
 public class LoginDialog extends JDialog {
 	
-	private final int DIALOG_WIDTH = 300;
+	private final int DIALOG_WIDTH = 200;
 	private final int DIALOG_HEIGHT = 150;
 	private final String TITLE = "로그인";
 	
-	private JPanel p1, p2;
+	private JPanel p1, p2, p3, p4;
 	private JLabel labelID, labelPW;
 	private JButton btnLogin, btnCancel;
 	private JTextField textID;
@@ -50,11 +50,16 @@ public class LoginDialog extends JDialog {
 	
 	public void addPanel() {
 		
-		p1 = new JPanel(new GridLayout(2, 2, 10, 10));
-		p2 = new JPanel(new FlowLayout());
+		p1 = new JPanel(new BorderLayout());
+		p2 = new JPanel(new GridLayout(2, 1, 15, 15));
+		p3 = new JPanel(new GridLayout(2, 1, 15, 15));
+		p4 = new JPanel(new FlowLayout());
+		
+		p1.add(p2, "West");
+		p1.add(p3, "Center");
 		
 		super.add(p1, "Center");
-		super.add(p2, "South");
+		super.add(p4, "South");
 	}
 	
 	public void addTextField() {
@@ -62,16 +67,16 @@ public class LoginDialog extends JDialog {
 		textID = new JTextField(20);
 		textPW = new JPasswordField(20);
 		
-		labelID = new JLabel("ID", SwingConstants.CENTER);
-		labelPW = new JLabel("PW", SwingConstants.CENTER);
+		labelID = new JLabel("아이디", SwingConstants.CENTER);
+		labelPW = new JLabel("비밀번호", SwingConstants.CENTER);
 		
 		textPW.setEchoChar('*');
 		
-		p1.add(labelID);
-		p1.add(textID);
+		p2.add(labelID);
+		p2.add(labelPW);
 		
-		p1.add(labelPW);
-		p1.add(textPW);
+		p3.add(textID);
+		p3.add(textPW);
 	}
 	
 	public void addButton() {
@@ -97,8 +102,8 @@ public class LoginDialog extends JDialog {
 		
 		btnCancel.addActionListener((ActionEvent e) -> { super.dispose(); });
 		
-		p2.add(btnLogin);
-		p2.add(btnCancel);
+		p4.add(btnLogin);
+		p4.add(btnCancel);
 	}
 
 }

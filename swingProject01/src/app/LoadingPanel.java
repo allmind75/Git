@@ -31,7 +31,7 @@ public class LoadingPanel extends JPanel implements Runnable {
 
 		try {
 
-			Thread.sleep(4000);
+			Thread.sleep(1500);
 			super.setVisible(false);
 			
 		} catch (InterruptedException e) {
