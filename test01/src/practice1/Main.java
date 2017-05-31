@@ -54,13 +54,13 @@ public class Main {
 	public void exam4() {
 		
 		System.out.println("[exam4]");
-		double n1 = 250;
-		double n2 = 60;
-		double result = n1 / n2;
-		double remainder = n1 % n2;
+		int n1 = 250;
+		int n2 = 60;
+		int result = n1 / n2;
+		int remainder = n1 % n2;
 		
-		System.out.println("¸ò : " + n1);
-		System.out.println("³ª¸ÓÁö : " + n2);
+		System.out.println("¸ò : " + result);
+		System.out.println("³ª¸ÓÁö : " + remainder);
 	}
 	
 	public void exam5() {
