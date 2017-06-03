@@ -27,7 +27,7 @@ public class LoadingPanel extends JPanel implements Runnable {
 	}
 
 	@Override
-	public void run() {
+	public synchronized void run() {
 
 		try {
 
