@@ -27,8 +27,10 @@ public class Main {
 		// m.exam14();
 		// m.exam15();
 		// m.exam16();
-		//m.exam17();
-		m.exam18();
+		// m.exam17();
+		// m.exam18();
+		// m.exam19();
+		m.exam20();
 	}
 
 	public void exam01() {
@@ -332,7 +334,7 @@ public class Main {
 	}
 
 	public void exam18() {
-		
+
 		double multi = 1;
 
 		for (int i = 1; i <= 100; i++) {
@@ -350,6 +352,43 @@ public class Main {
 			}
 		}
 
-		System.out.println("\n¼ö¿­ÀÇ °ö : " + multi);		
+		System.out.println("\n¼ö¿­ÀÇ °ö : " + multi);
+	}
+
+	public void exam19() {
+
+		double sum = 0;
+
+		for (int i = 1; i < 100; i++) {
+
+			if (i % 2 == 0) {
+				sum += (double) i / (i + 1);
+				System.out.print("+" + "(" + i + "/" + (i + 1) + ")");
+			} else {
+				sum -= (double) i / (i + 1);
+				System.out.print("-" + "(" + i + "/" + (i + 1) + ")");
+			}
+		}
+
+		System.out.println("\n = " + sum);
+	}
+
+	public void exam20() {
+
+		int sum = 0;
+		int facto = 1;
+		for (int i = 1; i <= 10; i++) {
+
+			System.out.print(i + "!");
+			if (i != 10)
+				System.out.print(" + ");
+			for (int j = 1; j <= i; j++) {
+				facto *= j;
+			}
+
+			sum += facto;
+		}
+
+		System.out.println(" = " + sum);
 	}
 }
