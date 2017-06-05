@@ -54,6 +54,7 @@ public class TypeSize {
 		} 
 		
 		System.out.println("x = " + x);
+		System.out.println("y = " + y);
 		System.out.println("x의 이진수   = " + str);
 		
 		int z = ~x;
