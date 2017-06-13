@@ -1,4 +1,4 @@
-package pratice0612_1;
+package practice2;
 
 public class Staff {
 
