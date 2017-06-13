@@ -20,7 +20,7 @@ public class Main {
 		// m.exam08();
 		// m.exam09();
 		// m.exam14();
-		m.exam15();
+		//m.exam15();
 
 		scan.close();
 	}

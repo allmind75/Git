@@ -26,11 +26,11 @@ public class Main {
 		// m.exam13();
 		// m.exam14();
 		// m.exam15();
-		// m.exam16();
+		 m.exam16();
 		// m.exam17();
 		// m.exam18();
 		// m.exam19();
-		m.exam20();
+		//m.exam20();
 	}
 
 	public void exam01() {
