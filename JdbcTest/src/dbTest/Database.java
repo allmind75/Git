@@ -2,6 +2,7 @@ package dbTest;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,6 +12,7 @@ public class Database {
 	private Connection con;
 	private Statement stmt;
 	private ResultSet rs;
+	private PreparedStatement pstmt;
 
 	private final String DRIVER = "com.mysql.jdbc.Driver";
 	private final String URL = "jdbc:mysql://localhost:3306/test_db";
@@ -44,11 +46,33 @@ public class Database {
 	}
 
 	public void insert(String[] str) {
-		String SQL = "insert into customers set id=" + "'" + str[0] + "'" + ", pass=" + "'" + str[1] + "'" + ", name="
-				+ "'" + str[2] + "'" + ", phone=" + "'" + str[3] + "'" + ", email=" + "'" + str[4] + "'";
+		String sql = "insert into customers set id=?, pass=?, name=?, phone=?, email=?";
+		
+		
+//		String SQL = "insert into customers set id=" + "'" + str[0] + "'" + ", pass=" + "'" + str[1] + "'" + ", name="
+//				+ "'" + str[2] + "'" + ", phone=" + "'" + str[3] + "'" + ", email=" + "'" + str[4] + "'";
 		try {
-			stmt.executeUpdate(SQL);
-			System.out.println("[고객추가완료]");
+			
+//			int result = stmt.executeUpdate(SQL);
+//			if (result > 0) {
+//				System.out.println("[고객추가완료]");
+//			} else {
+//				System.out.println("[고객추가실패!]");
+//			}
+			
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, str[0]);
+			pstmt.setString(2, str[1]);
+			pstmt.setString(3, str[2]);
+			pstmt.setString(4, str[3]);
+			pstmt.setString(5, str[4]);
+			
+			int result = pstmt.executeUpdate();
+			if(result > 0) System.out.println("[고객추가완료]");
+			else System.out.println("[고객추가실패!]");
+			
+			
 		} catch (SQLException e) {
 			System.out.println("SQL Error : " + e.getMessage());
 		}
@@ -68,7 +92,7 @@ public class Database {
 		String SQL = "select * from customers where name='" + name + "'";
 		try {
 			rs = stmt.executeQuery(SQL);
-			
+
 			if (rs.isBeforeFirst() == false) {
 				System.out.println("[검색된 고객이 없습니다.]");
 			} else {
@@ -85,9 +109,11 @@ public class Database {
 	public void closeConnection() {
 
 		try {
-			rs.close();
-			stmt.close();
-			con.close();
+			if(rs != null) {
+				if(!rs.isClosed()) rs.close();			
+			}
+			if(stmt != null) stmt.close();
+			if(con != null) con.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();

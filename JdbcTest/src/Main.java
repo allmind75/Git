@@ -30,7 +30,7 @@ public class Main {
 			 * .excuteUpdate(SQL) : insert, update, delete ..
 			 */
 			rs = stmt.executeQuery(SQL);						//SQL 문장을 실행하고 결과를 리턴
-			//stmt.executeUpdate(SQL);
+			//stmt.executeUpdate(SQL);							//SQL 문장 실행 후, 변경된 칼럼 수 int type 리턴
 		
 			
 			while(rs.next()) {
