@@ -9,10 +9,10 @@ import java.sql.Statement;
 
 public class DAO {
 
-	// private Connection con;		//Connection은 멤버변수로 선언해서는 안됨
-	// private Statement stmt;
-	// private PreparedStatement pstmt;
-	// private ResultSet rs;
+	private Connection con;
+	private Statement stmt;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
 
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private final String URL = "jdbc:mysql://localhost:3306/java";
@@ -35,10 +35,10 @@ public class DAO {
 		Class.forName(DRIVER);
 	}
 
-	public void reg(DTOBean dto) throws ClassNotFoundException, SQLException {
+	public boolean reg(DTOBean dto) throws ClassNotFoundException, SQLException {
 
-		Connection con = DriverManager.getConnection(URL, USER, PW);
-		PreparedStatement pstmt = con.prepareStatement("INSERT INTO member(id, pw, name, reg_date) VALUES(?,MD5(?),?,now())");
+		con = DriverManager.getConnection(URL, USER, PW);
+		pstmt = con.prepareStatement("INSERT INTO member(id, pw, name, reg_date) VALUES(?,MD5(?),?,now())");
 
 		pstmt.setString(1, dto.getId());
 		pstmt.setString(2, dto.getPw());
@@ -46,83 +46,144 @@ public class DAO {
 
 		int r = pstmt.executeUpdate();
 		if (r == 1) {
-			System.out.println("[회원추가완료 " + r  + " rows]");
+			close(con, null, pstmt, null);
+			return true;
 		} else {
-			System.out.println("[회원추가실패]");
+			close(con, null, pstmt, null);
+			return false;
 		}
 
-		if (pstmt != null) {
-			try {
-				pstmt.close();
-			} catch (Exception e) {
-			}
-		}
-		if (con != null) {
-			try {
-				con.close();
-			} catch (Exception e) {
-			}
-		}
+		
 	}
 	
 	public boolean login(DTOBean dto) throws ClassNotFoundException, SQLException {
 		
-		Connection con = DriverManager.getConnection(URL, USER, PW);
-		Statement stmt = con.createStatement();
-		ResultSet rs;
-		String sql = "select id, pw from member where id='" + dto.getId() + "'" + "and pw=MD5('" + dto.getPw() + "')";
+		con = DriverManager.getConnection(URL, USER, PW);
+		stmt = con.createStatement();
+
+		String id = "'" +dto.getId() + "'";
+		String pw = "MD5('" + dto.getPw() + "')";
+		String sql = "select id, pw from member where id=" + id + " and pw=" + pw;
 		
 		rs = stmt.executeQuery(sql);
 		
 		if(rs.isBeforeFirst()) {
-			System.out.println("[로그인 성공]");
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch(Exception e) {
-					
-				}
-			}
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (Exception e) {
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-				}
-			}
+			close(con, stmt, null, rs);
 			return true;
 		} else {
-			System.out.println("[로그인 실패 : 아이디 또는 비밀번호 잘못입력]");
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch(Exception e) {
-					
-				}
-			}
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (Exception e) {
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-				}
-			}
+			close(con, stmt, null, rs);
 			return false;
 		}
 	}
 	
-	public void delete(DTOBean dto) throws ClassNotFoundException, SQLException {
+	public boolean update(DTOBean dto) throws ClassNotFoundException, SQLException {
 		
+		String sql = "";
+		
+		con = DriverManager.getConnection(URL, USER, PW);
+		pstmt = con.prepareStatement(sql);
+		
+		
+		
+		int r = pstmt.executeUpdate();
+		if( r == 1) {
+			close(con, stmt, null, rs);
+			return true;
+		} else {
+			close(con, stmt, null, rs);
+			return false;
+		}
+		
+	}
+	
+	public boolean delete(DTOBean dto) throws ClassNotFoundException, SQLException {
+		
+		con = DriverManager.getConnection(URL, USER, PW);
+		stmt = con.createStatement();
+		
+		String sql = "delete from member where id='" + dto.getId() + "'";
+		
+		int r = stmt.executeUpdate(sql);
+		if(r == 1) {
+			close(con, stmt, null, rs);
+			return true;
+		} else {
+			close(con, stmt, null, rs);
+			return false;
+		}
+	}
+	
+	public void updateLoginCnt(String id) throws ClassNotFoundException, SQLException {
+	
+		con = DriverManager.getConnection(URL, USER, PW);
+		stmt = con.createStatement();
+		
+		String sqlR = "select count from member where id='" + id + "'";
+		int cnt = 0;
+		
+		rs = stmt.executeQuery(sqlR);
+		while(rs.next()) {
+			cnt = rs.getInt(1);
+		}
+		
+		String sql = "update member set count=" + (++cnt) + " where id='" + id + "'";
+		int r = stmt.executeUpdate(sql);
+		if(r == 1) {
+			close(con, stmt, null, rs);
+		} else {
+			close(con, stmt, null, rs);
+		}
+	}
+	
+	public void print() throws ClassNotFoundException, SQLException {
+		
+		con = DriverManager.getConnection(URL, USER, PW);
+		stmt = con.createStatement();
+		
+		String sql = "select * from member";
+		
+		rs = stmt.executeQuery(sql);
+		
+		while(rs.next()) {
+			System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5));
+		}
+		
+		close(con, stmt, null, rs);
+		
+	}
+	
+	public void close(Connection con, Statement stmt, PreparedStatement pstmt, ResultSet rs) {
+		if(rs != null) {
+			try {
+				rs.close();
+				rs = null;
+			} catch(Exception e) {
+				
+			}
+		}
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+				pstmt = null;
+			} catch(Exception e) {
+				
+			}
+		}
+		if (stmt != null) {
+			try {
+				stmt.close();
+				stmt = null;
+			} catch (Exception e) {
+			}
+		}
+
+		if (con != null) {
+			try {
+				con.close();
+				con = null;
+			} catch (Exception e) {
+			}
+		}
 	}
 
 }
