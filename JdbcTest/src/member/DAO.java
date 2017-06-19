@@ -76,8 +76,23 @@ public class DAO {
 		}
 	}
 	
-	public boolean update(DTOBean dto) throws ClassNotFoundException, SQLException {
+	public void updatePrint(DTOBean dto) throws ClassNotFoundException, SQLException {
 		
+		con = DriverManager.getConnection(URL, USER, PW);
+		stmt = con.createStatement();
+		
+		String sql = "select id name from meber where id='" + dto.getId() + "'";
+		
+		rs = stmt.executeQuery(sql);
+		
+		
+		
+	}
+	
+	public boolean update(DTOBean dto) throws ClassNotFoundException, SQLException {
+		//기존정보가져와서 표시
+		//기존정보 수정
+		//update
 		String sql = "update member set name=? where id=?";
 		
 		con = DriverManager.getConnection(URL, USER, PW);
