@@ -79,7 +79,7 @@ public class Member {
 							System.out.println("[회원정보 변경 실패]");
 						}
 					} else {
-						System.out.println("[로그인 하지 않음]");
+						System.out.println("[로그인하지 않음]]");
 					}
 					break;
 				case 5:
@@ -91,7 +91,7 @@ public class Member {
 							System.out.println("[탈퇴 실패]");
 						}
 					} else {
-						System.out.println("[로그인 하지 않음]");
+						System.out.println("[로그인하지 않음]]");
 					}
 					break;
 				case 6:
@@ -148,7 +148,7 @@ public class Member {
 			session.removeAttribute("UserID");
 			System.out.println("[로그아웃]");
 		} else {
-			System.out.println("[로그인하지 않았습니다]");
+			System.out.println("[로그인하지 않음]");
 		}
 	}
 
