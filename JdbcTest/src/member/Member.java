@@ -10,7 +10,6 @@ public class Member {
 	private boolean run = true;;
 	private DAO dao;
 	private DTOBean dto;
-	private boolean isLogin;
 	private Session session;
 
 	public static void main(String[] args) {
@@ -18,6 +17,7 @@ public class Member {
 		Member member = new Member();
 
 		member.dao = new DAO();
+		member.session = new Session();
 
 		member.menu();
 	}
@@ -51,12 +51,13 @@ public class Member {
 					}
 					break;
 				case 2:
-					if (isLogin == false) {
+
+					if (session.getAttribute("UserID") == null) {
 						memeberLogin();
-						isLogin = dao.login(dto);
-						if (isLogin) {
-							session = new Session();
+
+						if (dao.login(dto)) {
 							session.setAttribute("UserID", dto.getId());
+
 							dao.updateLoginCnt(dto.getId());
 							System.out.println("[로그인성공 - ID : " + session.getAttribute("UserID") + "]");
 						} else {
@@ -67,20 +68,30 @@ public class Member {
 					}
 					break;
 				case 3:
-					if (isLogin) {
-						memberLogout();
-					} else {
-						System.out.println("[로그인 상태가 아닙니다]");
-					}
+					memberLogout();
 					break;
 				case 4:
+					if (session.getAttribute("UserID") != null) {
+						memberUpdate();
+						if (dao.update(dto)) {
+							System.out.println("[회원정보 변경 완료]");
+						} else {
+							System.out.println("[회원정보 변경 실패]");
+						}
+					} else {
+						System.out.println("[로그인 하지 않음]");
+					}
 					break;
 				case 5:
-					memberDelete();
-					if (dao.delete(dto)) {
-						System.out.println("[탈퇴완료 - " + dto.getId() + "]");
+					if (session.getAttribute("UserID") != null) {
+						memberDelete();
+						if (dao.delete(dto)) {
+							System.out.println("[탈퇴완료 - " + dto.getId() + "]");
+						} else {
+							System.out.println("[탈퇴 실패]");
+						}
 					} else {
-						System.out.println("[입력하신 아이디가 없습니다]");
+						System.out.println("[로그인 하지 않음]");
 					}
 					break;
 				case 6:
@@ -133,23 +144,28 @@ public class Member {
 	}
 
 	public void memberLogout() {
-		if (isLogin) {
+		if (session.getAttribute("UserID") != null) {
+			session.removeAttribute("UserID");
 			System.out.println("[로그아웃]");
-			isLogin = false;
-			session = null;
 		} else {
 			System.out.println("[로그인하지 않았습니다]");
 		}
 	}
 
 	public void memberDelete() {
-		String id;
 		dto = new DTOBean();
-
-		System.out.println("[탈퇴 - 아이디]");
-		System.out.print("아이디> ");
-		id = scan.nextLine();
-
-		dto.setId(id);
+		dto.setId(session.getAttribute("UserID"));
+		session.removeAttribute("UserID");
 	}
+
+	public void memberUpdate() {
+		String name;
+		System.out.println("[정보수정 - 이름]");
+		System.out.print("변경할 이름> ");
+		name = scan.nextLine();
+
+		dto.setName(name);
+		dto.setId(session.getAttribute("UserID"));
+	}
+
 }

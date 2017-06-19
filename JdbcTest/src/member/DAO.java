@@ -78,12 +78,12 @@ public class DAO {
 	
 	public boolean update(DTOBean dto) throws ClassNotFoundException, SQLException {
 		
-		String sql = "";
+		String sql = "update member set name=? where id=?";
 		
 		con = DriverManager.getConnection(URL, USER, PW);
 		pstmt = con.prepareStatement(sql);
-		
-		
+		pstmt.setString(1, dto.getName());
+		pstmt.setString(2, dto.getId());
 		
 		int r = pstmt.executeUpdate();
 		if( r == 1) {

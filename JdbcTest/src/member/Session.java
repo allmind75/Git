@@ -11,10 +11,17 @@ public class Session {
 	}
 
 	public String getAttribute(String name) {
-		if (this.name.equals(name)) {
+		if (this.name != null && this.name.equals(name)) {
 			return this.value;
 		} else {
 			return null;
+		}
+	}
+	
+	public void removeAttribute(String name) {
+		if(this.name != null && this.value != null && this.name.equals(name)) {
+			this.name = null;
+			this.value = null;
 		}
 	}
 }
