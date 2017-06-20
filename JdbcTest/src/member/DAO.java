@@ -22,7 +22,7 @@ public class DAO {
 	static {
 		try {
 			init();
-		} catch (Exception e) {
+		} catch (ClassNotFoundException e) {
 			System.out.println("Class Load fail : " + e.getMessage());
 		}
 	}
@@ -31,11 +31,11 @@ public class DAO {
 
 	}
 
-	private static void init() throws Exception {
+	private static void init() throws ClassNotFoundException {
 		Class.forName(DRIVER);
 	}
 
-	public boolean reg(DTOBean dto) throws ClassNotFoundException, SQLException {
+	public boolean reg(DTOBean dto) throws SQLException {
 
 		con = DriverManager.getConnection(URL, USER, PW);
 		pstmt = con.prepareStatement("INSERT INTO member(id, pw, name, reg_date) VALUES(?,MD5(?),?,now())");
@@ -56,7 +56,7 @@ public class DAO {
 		
 	}
 	
-	public boolean login(DTOBean dto) throws ClassNotFoundException, SQLException {
+	public boolean login(DTOBean dto) throws SQLException {
 		
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
@@ -76,29 +76,35 @@ public class DAO {
 		}
 	}
 	
-	public void updatePrint(DTOBean dto) throws ClassNotFoundException, SQLException {
-		
+
+	public DTOBean getInfo(String id) throws SQLException {
+		//기존정보가져와서 표시
+		DTOBean dto = new DTOBean();
+		String sql = "select pw, name from member where id='" + id + "'";
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
-		
-		String sql = "select id name from meber where id='" + dto.getId() + "'";
-		
 		rs = stmt.executeQuery(sql);
 		
+		if(rs.next()) {
+			dto.setPw(rs.getString("pw"));
+			dto.setName(rs.getString("name"));
+			return dto;
+		}
 		
-		
+		close(con, stmt, null, rs);
+		return null;
 	}
 	
-	public boolean update(DTOBean dto) throws ClassNotFoundException, SQLException {
-		//기존정보가져와서 표시
+	public boolean updateMemberInfo(DTOBean dto) throws SQLException {
+		
 		//기존정보 수정
-		//update
-		String sql = "update member set name=? where id=?";
+		String sql = "update member set name=?, pw=md5(?) where id=?";
 		
 		con = DriverManager.getConnection(URL, USER, PW);
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, dto.getName());
-		pstmt.setString(2, dto.getId());
+		pstmt.setString(2, dto.getPw());
+		pstmt.setString(3, dto.getId());
 		
 		int r = pstmt.executeUpdate();
 		if( r == 1) {
@@ -111,7 +117,7 @@ public class DAO {
 		
 	}
 	
-	public boolean delete(DTOBean dto) throws ClassNotFoundException, SQLException {
+	public boolean delete(DTOBean dto) throws SQLException {
 		
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
@@ -128,7 +134,7 @@ public class DAO {
 		}
 	}
 	
-	public void updateLoginCnt(String id) throws ClassNotFoundException, SQLException {
+	public void updateLoginCnt(String id) throws SQLException {
 	
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
@@ -150,7 +156,38 @@ public class DAO {
 		}
 	}
 	
-	public void print() throws ClassNotFoundException, SQLException {
+	public boolean selectPW(DTOBean dto) throws SQLException {
+		
+		con = DriverManager.getConnection(URL, USER, PW);
+		stmt = con.createStatement();
+		String sql = "select id, pw from member where id='" + dto.getId() + "' and pw=md5('" + dto.getPw() + "')";
+		rs = stmt.executeQuery(sql);
+		
+		if(rs.next()) {
+			close(con, stmt, null, rs);
+			return true;
+		}
+		
+		close(con, stmt, null, rs);
+		return false;
+	}
+
+	public boolean updateChgPW(DTOBean dto) throws SQLException {
+		
+		con = DriverManager.getConnection(URL, USER, PW);
+		stmt = con.createStatement();
+		String sql = "update member set pw=md5('" + dto.getPw() + "') where id='" + dto.getId() + "'";
+		int rs = stmt.executeUpdate(sql);
+		
+		if(rs == 1) {
+			close(con, stmt, null, null);
+			return true;
+		}
+		close(con, stmt, null, null);
+		return false;
+	}
+	
+	public void print() throws SQLException {
 		
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();

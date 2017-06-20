@@ -27,7 +27,7 @@ public class Member {
 
 		while (run) {
 
-			System.out.println("[메뉴 : 1.회원가입 | 2.로그인 | 3. 로그아웃 | 4.정보수정 | 5.탈퇴 | 6.회원보기 | 7.종료]");
+			System.out.println("[메뉴 : 1.회원가입 | 2.로그인 | 3. 로그아웃 | 4.정보수정 | 5.탈퇴 | | 6.비밀번호 변경 | 7.회원보기 | 8.종료]");
 			System.out.print("메뉴선택> ");
 
 			try {
@@ -72,12 +72,26 @@ public class Member {
 					break;
 				case 4:
 					if (session.getAttribute("UserID") != null) {
-						memberUpdate();
-						if (dao.update(dto)) {
-							System.out.println("[회원정보 변경 완료]");
+						// 로그인한 사용자 정보 출력
+						String id = session.getAttribute("UserID");
+						DTOBean dtoInfo = dao.getInfo(id);
+
+						if (dtoInfo != null) {
+							System.out.println("[비밀번호 : " + dtoInfo.getPw() + "]");
+							System.out.println("[이    름 : " + dtoInfo.getName() + "]");
+
+							// 정보수정
+							memberUpdate();
+							if (dao.updateMemberInfo(dto)) {
+								System.out.println("[회원정보 변경 완료]");
+							} else {
+								System.out.println("[회원정보 변경 실패]");
+							}
+
 						} else {
-							System.out.println("[회원정보 변경 실패]");
+							System.out.println("[회원정보 가져오기 실패]");
 						}
+
 					} else {
 						System.out.println("[로그인하지 않음]]");
 					}
@@ -95,15 +109,45 @@ public class Member {
 					}
 					break;
 				case 6:
-					dao.print();
+					if (session.getAttribute("UserID") != null) {
+						String pw;
+						DTOBean dto = new DTOBean();
+						
+						System.out.println("[기존 비밀번호 입력]");
+						System.out.print("입력> ");
+						pw = scan.nextLine();
+						
+						dto.setId(session.getAttribute("UserID"));
+						dto.setPw(pw);
+						
+						if (dao.selectPW(dto)) {
+							System.out.println("[비밀번호같음]");
+							System.out.println("[변경할 비밀번호 입력]");
+							
+							pw = scan.nextLine();
+							dto.setPw(pw);
+							
+							
+							if(dao.updateChgPW(dto)) {
+								System.out.println("[새로운 비밀번호 변경 완료]");
+							} else {
+								System.out.println("[비밀번호 변경 실패]");
+							}
+						} else {
+							System.out.println("[비밀번호 틀림]");
+						}
+					} else {
+						System.out.println("[로그인하지 않음]");
+					}
 					break;
 				case 7:
+					dao.print();
+					break;
+				case 8:
 					run = false;
 					System.out.println("[프로그램 종료]");
 					break;
 				}
-			} catch (ClassNotFoundException e) {
-				System.out.println("Connector Error : " + e.getMessage());
 			} catch (SQLException e1) {
 				System.out.println("SQL Error : " + e1.getMessage());
 			}
@@ -159,7 +203,7 @@ public class Member {
 	}
 
 	public void memberUpdate() {
-		String name;
+		String name, pw;
 		System.out.println("[정보수정 - 이름]");
 		System.out.print("변경할 이름> ");
 		name = scan.nextLine();
