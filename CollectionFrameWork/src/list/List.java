@@ -51,6 +51,10 @@ public class List {
 		for(String name: list2) {
 			System.out.println(name);
 		}
+		
+		//ArrayList를 이용해서 배열에 특정 값이 들어 있는지 확인
+		boolean isFlag = Arrays.asList(strArr).contains("유재석");
+		System.out.println(isFlag);
 	}
 
 }
