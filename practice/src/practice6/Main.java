@@ -22,11 +22,17 @@ public class Main {
 		
 		for(Product p: product) {
 			
+			//문자열비교
 			if(p.getCompany().name().equals(str)) {
 				System.out.println("제품이름 : " + p.getName());
 				System.out.println("제 조 사 : " + p.getCompany());
 				System.out.println("가    격 : " + p.getPrice());
 				System.out.println("제조날짜 : " + p.getDate());
+			}
+			
+			//enum 비교(숫자 비교)
+			if(p.getCompany() == Company.valueOf(str)) {
+				System.out.println("다른방법");
 			}
 		}
 		
