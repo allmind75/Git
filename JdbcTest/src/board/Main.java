@@ -9,7 +9,8 @@ public class Main {
 	private Scanner sc = new Scanner(System.in);
 	private boolean run = true;
 	private BoardDAO dao = BoardDAO.getInstance();
-	
+	private ReplyDAO replyDao = ReplyDAO.getInstance();
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Main m = new Main();
@@ -45,7 +46,7 @@ public class Main {
 				contentPrint();
 				break;
 			case 4:
-
+				search();
 				break;
 			case 5:
 				run = false;
@@ -62,14 +63,7 @@ public class Main {
 		ArrayList<BoardDTO> list = dao.listPrint();
 
 		if (list != null) {
-			System.out.printf("%5s | %30s | %5s | %20s\n", "num", "title", "count", "reg_date");
-			for (BoardDTO dto : list) {
-				System.out.printf("%5d | ", dto.getNum());
-				System.out.printf("%30s | ", dto.getTitle());
-				System.out.printf("%5d | ", dto.getCount());
-				System.out.printf("%20s\n", dto.getDatetime());
-
-			}
+			print(list);
 		} else {
 			System.out.println("[글 존재 안함]");
 		}
@@ -99,6 +93,9 @@ public class Main {
 	public void contentPrint() {
 		int num;
 		BoardDTO dto;
+		ReplyDTO replyDto = new ReplyDTO();
+		String reply;
+		ArrayList<ReplyDTO> list;
 
 		System.out.println("[글 번호 입력]");
 		System.out.print("입력> ");
@@ -110,6 +107,45 @@ public class Main {
 			if (dto != null) {
 				System.out.println("< " + dto.getTitle() + " >");
 				System.out.println("- " + dto.getContent());
+
+				list = replyDao.printReply(dto.getNum());
+				if (list != null) {
+					for (ReplyDTO d : list) {
+						System.out.println(d.getContent());
+					}
+				} else {
+					System.out.println("[댓글 없음]");
+				}
+
+				while (true) {
+					System.out.println("[1. 댓글 | 2. 글삭제 | 3.홈]");
+					num = sc.nextInt();
+					sc.nextLine();
+
+					if (num == 1) {
+
+						System.out.print("댓글입력> ");
+						reply = sc.nextLine();
+
+						replyDto.setLink(dto.getNum());
+						replyDto.setContent(reply);
+
+						replyDao.insert(replyDto);
+
+					} else if (num == 2) {
+						if(dao.delete(dto.getNum())) {
+							System.out.println("[" + num + ". 글 삭제완료]");
+							break;
+						} else {
+							System.out.println("[글 삭제 실패]");
+						}
+					} else if (num == 3) {
+						break;
+					} else {
+						System.out.println("[메뉴에 없는 번호 선택]");
+					}
+				}
+
 			} else {
 				System.out.println("[입력한 번호 게시물 없음]");
 			}
@@ -117,6 +153,74 @@ public class Main {
 			System.out.println("[정수만 입력]");
 			sc = new Scanner(System.in);
 		}
+	}
+
+	public void search() {
+		int num;
+		String text;
+		ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
+
+		System.out.println("[1.제목검색 | 2.내용검색]");
+		System.out.print("입력> ");
+		try {
+			num = sc.nextInt();
+			sc.nextLine();
+
+			if (num == 1) {
+				System.out.print("제목검색> ");
+				text = sc.nextLine();
+
+				boardList = dao.searchTitle(text);
+
+				if (boardList != null) {
+					print(boardList);
+				} else {
+					System.out.println("[검색 결과 없음]");
+				}
+
+			} else if (num == 2) {
+				System.out.print("내용검색> ");
+				text = sc.nextLine();
+
+				boardList = dao.searchContent(text);
+
+				if (boardList != null) {
+					printContent(boardList);
+				} else {
+					System.out.println("[검색 결과 없음]");
+				}
+			} else {
+
+			}
+		} catch (InputMismatchException e) {
+			sc = new Scanner(System.in);
+			System.out.println("[정수만 입력]");
+		}
+
+	}
+
+	public void print(ArrayList<BoardDTO> list) {
+		System.out.printf("%5s | %30s | %5s | %11s\n", "num", "title", "count", "reg_date");
+		for (BoardDTO dto : list) {
+			System.out.printf("%5d | ", dto.getNum());
+			System.out.printf("%30s | ", dto.getTitle());
+			System.out.printf("%5d | ", dto.getCount());
+			System.out.printf("%11s\n", dto.getDatetime().substring(0,10));
+
+		}
+	}
+
+	public void printContent(ArrayList<BoardDTO> list) {
+		System.out.printf("%5s | %30s | %5s | %11s | %s\n", "num", "title", "count", "reg_date", "content");
+		for (BoardDTO dto : list) {
+			System.out.printf("%5d | ", dto.getNum());
+			System.out.printf("%30s | ", dto.getTitle());
+			System.out.printf("%5d | ", dto.getCount());
+			System.out.printf("%11s |", dto.getDatetime().substring(0,10));
+			System.out.println(" " + dto.getContent());
+
+		}
+
 	}
 
 }

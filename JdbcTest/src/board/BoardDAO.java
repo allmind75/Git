@@ -30,8 +30,9 @@ public class BoardDAO {
 	}
 
 	private BoardDAO() {
-		
+
 	}
+
 	public static BoardDAO getInstance() {
 		if (dao == null) {
 			dao = new BoardDAO();
@@ -42,13 +43,13 @@ public class BoardDAO {
 	public ArrayList<BoardDTO> listPrint() {
 		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
 		try {
-			String sql = "select num, title, count, reg_date from board";
+			String sql = "select num, title, count, reg_date from board order by num desc";
 			con = DriverManager.getConnection(URL, USER, PW);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 
 			if (rs.isBeforeFirst()) {
-				
+
 				while (rs.next()) {
 					BoardDTO dto = new BoardDTO();
 					dto.setNum(rs.getInt("num"));
@@ -57,7 +58,7 @@ public class BoardDAO {
 					dto.setDatetime(rs.getString("reg_date"));
 					list.add(dto);
 				}
-				
+
 				return list;
 			}
 		} catch (SQLException e) {
@@ -103,9 +104,9 @@ public class BoardDAO {
 				dto.setTitle(rs.getString("title"));
 				dto.setContent(rs.getString("content"));
 				dto.setCount(rs.getInt("count"));
-				
-				updateContentCnt(dto);		//count 증가
-				
+
+				updateContentCnt(dto); // count 증가
+
 				return dto;
 			}
 		} catch (SQLException e) {
@@ -115,7 +116,7 @@ public class BoardDAO {
 		}
 		return null;
 	}
-	
+
 	public void updateContentCnt(BoardDTO dto) {
 		try {
 			int cnt = dto.getCount();
@@ -123,14 +124,94 @@ public class BoardDAO {
 			con = DriverManager.getConnection(URL, USER, PW);
 			stmt = con.createStatement();
 			stmt.executeUpdate(sql);
-			
-		} catch(SQLException e) {
+
+		} catch (SQLException e) {
 			System.out.println("SQLException : " + e.getMessage());
 		} finally {
 			close(con, stmt, null);
 		}
 	}
+
+	public ArrayList<BoardDTO> searchTitle(String title) {
+		
+		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
+		try {
+			String sql = "select * from board where title like ?";
+			con = DriverManager.getConnection(URL, USER, PW);
+			pstmt = con.prepareStatement(sql);
+			
+			title = "%" + title + "%";
+			pstmt.setString(1, title);
+			rs = pstmt.executeQuery();
+						
+			if (rs.isBeforeFirst()) {
+				while (rs.next()) {
+					BoardDTO dto = new BoardDTO();
+					dto.setNum(rs.getInt("num"));
+					dto.setTitle(rs.getString("title"));
+					dto.setCount(rs.getInt("count"));
+					dto.setDatetime(rs.getString("reg_date"));
+					list.add(dto);
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			System.out.println("SQLException : " + e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return null;
+	}
 	
+	public ArrayList<BoardDTO> searchContent(String content) {
+		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
+		try {
+			String sql = "select * from board where content like ?";
+			con = DriverManager.getConnection(URL, USER, PW);
+			pstmt = con.prepareStatement(sql);
+			
+			content = "%" + content + "%";
+			pstmt.setString(1, content);
+			rs = pstmt.executeQuery();
+			
+			if(rs.isBeforeFirst()) {
+				while(rs.next()) {
+					BoardDTO dto = new BoardDTO();
+					dto.setNum(rs.getInt("num"));
+					dto.setTitle(rs.getString("title"));
+					dto.setContent(rs.getString("content"));
+					dto.setCount(rs.getInt("count"));
+					dto.setDatetime(rs.getString("reg_date"));
+					list.add(dto);
+				}
+				return list;
+			}		
+		} catch(SQLException e) {
+			System.out.println("SQLException : " + e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return null;
+	}
+	
+	public boolean delete(int num) {
+		try {
+			String sql = "delete from board where num ='" + num + "'";
+			con = DriverManager.getConnection(URL, USER, PW);
+			stmt = con.createStatement();
+			
+			int r = stmt.executeUpdate(sql);
+			if(r == 1) {
+				return true;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(con, stmt, null);
+		}
+		return false;
+	}
+
 	public void close(Connection con, Statement stmt, ResultSet rs) {
 		if (rs != null) {
 			try {

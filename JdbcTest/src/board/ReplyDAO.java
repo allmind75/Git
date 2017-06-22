@@ -1,9 +1,12 @@
 package board;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class ReplyDAO {
 
@@ -35,6 +38,54 @@ public class ReplyDAO {
 	
 	private ReplyDAO() {
 		
+	}
+	
+	public ArrayList<ReplyDTO> printReply(int num) {
+		ArrayList<ReplyDTO> list = new ArrayList<ReplyDTO>();
+		try {
+			String sql = "select content from reply where link=?";
+			con = DriverManager.getConnection(URL, USER, PW);
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1,  num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.isBeforeFirst()) {
+				while(rs.next()) {
+					ReplyDTO dto = new ReplyDTO();
+					dto.setContent(rs.getString("content"));
+					list.add(dto);
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return null;
+	}
+	
+	public boolean insert(ReplyDTO dto) {
+		try {
+			String sql = "insert into reply(link, content) values(?, ?)";
+			con = DriverManager.getConnection(URL, USER, PW);
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, dto.getLink());
+			pstmt.setString(2, dto.getContent());
+			
+			int r = pstmt.executeUpdate();
+			if(r == 1) {
+				return true;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(con, pstmt, null);
+		}
+		return false;
 	}
 	
 	public void close(Connection con, Statement stmt, ResultSet rs) {
