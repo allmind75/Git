@@ -196,7 +196,7 @@ public class BoardDAO {
 	
 	public boolean delete(int num) {
 		try {
-			String sql = "delete from board where num ='" + num + "'";
+			String sql = "delete from board where num =" + num;
 			con = DriverManager.getConnection(URL, USER, PW);
 			stmt = con.createStatement();
 			

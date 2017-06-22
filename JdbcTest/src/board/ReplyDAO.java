@@ -88,6 +88,23 @@ public class ReplyDAO {
 		return false;
 	}
 	
+	public boolean delete(int num) {
+		try {
+			String sql = "delete from reply where num =" + num;
+			con = DriverManager.getConnection(URL, USER, PW);
+			stmt = con.createStatement();
+			
+			int r = stmt.executeUpdate(sql);
+			if(r == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			
+		} finally {
+			close(con, stmt, null);
+		}
+		return false;
+	}
 	public void close(Connection con, Statement stmt, ResultSet rs) {
 		if(rs != null) {
 			try {

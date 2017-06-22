@@ -134,6 +134,7 @@ public class Main {
 
 					} else if (num == 2) {
 						if(dao.delete(dto.getNum())) {
+							replyDao.delete(dto.getNum());
 							System.out.println("[" + num + ". 글 삭제완료]");
 							break;
 						} else {
