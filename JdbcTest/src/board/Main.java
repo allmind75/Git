@@ -166,7 +166,7 @@ public class Main {
 		try {
 			num = sc.nextInt();
 			sc.nextLine();
-	
+			
 			if (num == 1) {
 				System.out.print("°Ë»ö> ");
 				text = sc.nextLine();

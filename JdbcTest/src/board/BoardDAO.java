@@ -235,7 +235,7 @@ public class BoardDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(con, stmt, rs);
+			close(con, pstmt, rs);
 		}
 		return 0;
 	}
