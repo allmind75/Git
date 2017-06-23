@@ -63,7 +63,7 @@ public class Main {
 		ArrayList<BoardDTO> list = dao.listPrint();
 
 		if (list != null) {
-			print(list);
+			print(list, dao.boardCount("", 1));
 		} else {
 			System.out.println("[글 존재 안함]");
 		}
@@ -166,38 +166,22 @@ public class Main {
 		try {
 			num = sc.nextInt();
 			sc.nextLine();
-
+	
 			if (num == 1) {
-				System.out.print("제목검색> ");
+				System.out.print("검색> ");
 				text = sc.nextLine();
-
-				boardList = dao.searchTitle(text);
-
+				boardList = dao.search(text, num);
 				if (boardList != null) {
-					print(boardList);
+					print(boardList, dao.boardCount(text, num));
 				} else {
 					System.out.println("[검색 결과 없음]");
 				}
-
-			} else if (num == 2) {
-				System.out.print("내용검색> ");
+			} else if (num == 2 || num == 3) {
+				System.out.print("검색> ");
 				text = sc.nextLine();
-
-				boardList = dao.searchContent(text);
-
+				boardList = dao.search(text, num);
 				if (boardList != null) {
-					printContent(boardList);
-				} else {
-					System.out.println("[검색 결과 없음]");
-				}
-			} else if (num == 3){
-				System.out.print("제목 + 내용 검색> ");
-				text = sc.nextLine();
-				
-				boardList = dao.searchAll(text);
-				
-				if(boardList != null) {
-					printContent(boardList);
+					printContent(boardList, dao.boardCount(text, num));
 				} else {
 					System.out.println("[검색 결과 없음]");
 				}
@@ -211,18 +195,18 @@ public class Main {
 
 	}
 
-	public void print(ArrayList<BoardDTO> list) {
+	public void print(ArrayList<BoardDTO> list, int boardCnt) {
 		System.out.printf("%5s | %30s | %5s | %11s\n", "num", "title", "count", "reg_date");
 		for (BoardDTO dto : list) {
 			System.out.printf("%5d | ", dto.getNum());
 			System.out.printf("%30s | ", dto.getTitle());
 			System.out.printf("%5d | ", dto.getCount());
 			System.out.printf("%11s\n", dto.getDatetime().substring(0,10));
-
 		}
+		System.out.println("[" + boardCnt + "개의 글이 검색]");
 	}
 
-	public void printContent(ArrayList<BoardDTO> list) {
+	public void printContent(ArrayList<BoardDTO> list, int boardCnt) {
 		System.out.printf("%5s | %30s | %5s | %11s | %s\n", "num", "title", "count", "reg_date", "content");
 		for (BoardDTO dto : list) {
 			System.out.printf("%5d | ", dto.getNum());
@@ -230,9 +214,8 @@ public class Main {
 			System.out.printf("%5d | ", dto.getCount());
 			System.out.printf("%11s |", dto.getDatetime().substring(0,10));
 			System.out.println(" " + dto.getContent());
-
 		}
-
+		System.out.println("[" + boardCnt + "개의 글이 검색]");
 	}
 
 }

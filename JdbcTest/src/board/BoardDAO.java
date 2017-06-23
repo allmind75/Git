@@ -132,48 +132,37 @@ public class BoardDAO {
 		}
 	}
 
-	public ArrayList<BoardDTO> searchTitle(String title) {
-		
+	public ArrayList<BoardDTO> search(String text, int mode) {
 		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
+		text = "%" + text + "%";
+		String sql = "select * from board ";
+		String where;
 		try {
-			String sql = "select * from board where title like ?";
 			con = DriverManager.getConnection(URL, USER, PW);
-			pstmt = con.prepareStatement(sql);
 			
-			title = "%" + title + "%";
-			pstmt.setString(1, title);
-			rs = pstmt.executeQuery();
-						
-			if (rs.isBeforeFirst()) {
-				while (rs.next()) {
-					BoardDTO dto = new BoardDTO();
-					dto.setNum(rs.getInt("num"));
-					dto.setTitle(rs.getString("title"));
-					dto.setCount(rs.getInt("count"));
-					dto.setDatetime(rs.getString("reg_date"));
-					list.add(dto);
-				}
-				return list;
+			switch(mode) {
+			case 1:
+				where = "where title like ?";
+				pstmt = con.prepareStatement(sql + where);
+				pstmt.setString(1, text);
+				break;
+			case 2:
+				where = "where content like ?";
+				pstmt = con.prepareStatement(sql + where);
+				pstmt.setString(1, text);
+				break;
+			case 3:
+				where = "where title like ? || content like ?";
+				pstmt = con.prepareStatement(sql + where);
+				pstmt.setString(1, text);
+				pstmt.setString(2, text);
+				break;
+			default:
+				return null;
 			}
-		} catch (SQLException e) {
-			System.out.println("SQLException : " + e.getMessage());
-		} finally {
-			close(con, pstmt, rs);
-		}
-		return null;
-	}
-	
-	public ArrayList<BoardDTO> searchContent(String content) {
-		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
-		try {
-			String sql = "select * from board where content like ?";
-			con = DriverManager.getConnection(URL, USER, PW);
-			pstmt = con.prepareStatement(sql);
 			
-			content = "%" + content + "%";
-			pstmt.setString(1, content);
 			rs = pstmt.executeQuery();
-			
+
 			if(rs.isBeforeFirst()) {
 				while(rs.next()) {
 					BoardDTO dto = new BoardDTO();
@@ -182,49 +171,18 @@ public class BoardDAO {
 					dto.setContent(rs.getString("content"));
 					dto.setCount(rs.getInt("count"));
 					dto.setDatetime(rs.getString("reg_date"));
-					list.add(dto);
+					list.add(dto);			
 				}
 				return list;
-			}		
+			}
 		} catch(SQLException e) {
-			System.out.println("SQLException : " + e.getMessage());
+			e.printStackTrace();
 		} finally {
 			close(con, pstmt, rs);
 		}
 		return null;
 	}
 	
-	public ArrayList<BoardDTO> searchAll(String text) {
-		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
-		try {
-			String sql = "select * from board where title like ? || content like ?";
-			con = DriverManager.getConnection(URL, USER, PW);
-			pstmt = con.prepareStatement(sql);
-			
-			text = "%" + text + "%";
-			pstmt.setString(1, text);
-			pstmt.setString(2,  text);
-			rs = pstmt.executeQuery();
-			
-			if(rs.isBeforeFirst()) {
-				while(rs.next()) {
-					BoardDTO dto = new BoardDTO();
-					dto.setNum(rs.getInt("num"));
-					dto.setTitle(rs.getString("title"));
-					dto.setContent(rs.getString("content"));
-					dto.setCount(rs.getInt("count"));
-					dto.setDatetime(rs.getString("reg_date"));
-					list.add(dto);
-				}
-				return list;
-			}
- 		} catch (SQLException e) {
- 			e.printStackTrace();
- 		} finally {
- 			close(con, pstmt, rs);
- 		}
-		return null;
-	}
 	public boolean delete(int num) {
 		try {
 			String sql = "delete from board where num =" + num;
@@ -243,6 +201,45 @@ public class BoardDAO {
 		return false;
 	}
 
+	public int boardCount(String text, int mode) {
+		String where;
+		text = "%" + text + "%";
+		try {
+			String sql = "select count(*) from board ";
+			con = DriverManager.getConnection(URL, USER, PW);
+			
+			switch(mode) {
+			case 1:
+				where = "where title like ?";
+				pstmt = con.prepareStatement(sql + where);
+				pstmt.setString(1, text);
+				break;
+			case 2:
+				where = "where content like ?";
+				pstmt = con.prepareStatement(sql + where);
+				pstmt.setString(1, text);
+				break;
+			case 3:
+				where = "where title like ? || content like ?";
+				pstmt = con.prepareStatement(sql + where);
+				pstmt.setString(1, text);
+				pstmt.setString(2, text);
+				break;
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(con, stmt, rs);
+		}
+		return 0;
+	}
+	
 	public void close(Connection con, Statement stmt, ResultSet rs) {
 		if (rs != null) {
 			try {
