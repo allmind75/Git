@@ -90,7 +90,7 @@ public class ReplyDAO {
 	
 	public boolean delete(int num) {
 		try {
-			String sql = "delete from reply where num =" + num;
+			String sql = "delete from reply where link =" + num;
 			con = DriverManager.getConnection(URL, USER, PW);
 			stmt = con.createStatement();
 			

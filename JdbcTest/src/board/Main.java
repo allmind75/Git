@@ -24,7 +24,7 @@ public class Main {
 		int menu;
 
 		while (run) {
-			System.out.println("[1.목록 | 2.글쓰기 | 3.내용 | 4.검색 | 5.종료]]");
+			System.out.println("[1.목록 | 2.글쓰기 | 3.내용 | 4.검색 | 5.종료]");
 			System.out.print("메뉴선택> ");
 			try {
 				menu = sc.nextInt();
@@ -102,13 +102,13 @@ public class Main {
 		try {
 			num = sc.nextInt();
 			sc.nextLine();
-			dto = dao.contentPrint(num);
+			dto = dao.contentPrint(num);		//내용 가져오기
 
 			if (dto != null) {
 				System.out.println("< " + dto.getTitle() + " >");
 				System.out.println("- " + dto.getContent());
 
-				list = replyDao.printReply(dto.getNum());
+				list = replyDao.printReply(dto.getNum());		//댓글출력
 				if (list != null) {
 					for (ReplyDTO d : list) {
 						System.out.println(d.getContent());
@@ -134,7 +134,7 @@ public class Main {
 
 					} else if (num == 2) {
 						if(dao.delete(dto.getNum())) {
-							replyDao.delete(dto.getNum());
+							replyDao.delete(dto.getNum());		//글삭제시 관련 댓글 삭제
 							System.out.println("[" + num + ". 글 삭제완료]");
 							break;
 						} else {
@@ -161,7 +161,7 @@ public class Main {
 		String text;
 		ArrayList<BoardDTO> boardList = new ArrayList<BoardDTO>();
 
-		System.out.println("[1.제목검색 | 2.내용검색]");
+		System.out.println("[1.제목검색 | 2.내용검색 | 3.제목 + 내용 검색]");
 		System.out.print("입력> ");
 		try {
 			num = sc.nextInt();
@@ -190,8 +190,19 @@ public class Main {
 				} else {
 					System.out.println("[검색 결과 없음]");
 				}
+			} else if (num == 3){
+				System.out.print("제목 + 내용 검색> ");
+				text = sc.nextLine();
+				
+				boardList = dao.searchAll(text);
+				
+				if(boardList != null) {
+					printContent(boardList);
+				} else {
+					System.out.println("[검색 결과 없음]");
+				}
 			} else {
-
+				System.out.println("[해당 메뉴 없음]");
 			}
 		} catch (InputMismatchException e) {
 			sc = new Scanner(System.in);

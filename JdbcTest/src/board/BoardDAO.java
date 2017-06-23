@@ -194,6 +194,37 @@ public class BoardDAO {
 		return null;
 	}
 	
+	public ArrayList<BoardDTO> searchAll(String text) {
+		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
+		try {
+			String sql = "select * from board where title like ? || content like ?";
+			con = DriverManager.getConnection(URL, USER, PW);
+			pstmt = con.prepareStatement(sql);
+			
+			text = "%" + text + "%";
+			pstmt.setString(1, text);
+			pstmt.setString(2,  text);
+			rs = pstmt.executeQuery();
+			
+			if(rs.isBeforeFirst()) {
+				while(rs.next()) {
+					BoardDTO dto = new BoardDTO();
+					dto.setNum(rs.getInt("num"));
+					dto.setTitle(rs.getString("title"));
+					dto.setContent(rs.getString("content"));
+					dto.setCount(rs.getInt("count"));
+					dto.setDatetime(rs.getString("reg_date"));
+					list.add(dto);
+				}
+				return list;
+			}
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			close(con, pstmt, rs);
+ 		}
+		return null;
+	}
 	public boolean delete(int num) {
 		try {
 			String sql = "delete from board where num =" + num;
