@@ -24,7 +24,7 @@ public class Main {
 		int menu;
 
 		while (run) {
-			System.out.println("[1.목록 | 2.글쓰기 | 3.내용 | 4.검색 | 5.종료]");
+			System.out.println("[1.목록 | 2.글쓰기 | 3.글읽기 | 4.검색 | 5.종료]");
 			System.out.print("메뉴선택> ");
 			try {
 				menu = sc.nextInt();
@@ -108,17 +108,22 @@ public class Main {
 				System.out.println("< " + dto.getTitle() + " >");
 				System.out.println("- " + dto.getContent());
 
-				list = replyDao.printReply(dto.getNum());		//댓글출력
+				list = replyDao.printReply(dto.getNum());		
 				if (list != null) {
+					//댓글수 출력
+					System.out.println("<총 " + replyDao.count(dto.getNum()) + "개의 댓글>");
+					
+					//댓글출력
 					for (ReplyDTO d : list) {
 						System.out.println(d.getContent());
 					}
+					
 				} else {
 					System.out.println("[댓글 없음]");
 				}
 
 				while (true) {
-					System.out.println("[1. 댓글 | 2. 글삭제 | 3.홈]");
+					System.out.println("[글읽기 - 1. 댓글 | 2. 글삭제 | 3.목록가기]");
 					num = sc.nextInt();
 					sc.nextLine();
 
@@ -135,7 +140,7 @@ public class Main {
 					} else if (num == 2) {
 						if(dao.delete(dto.getNum())) {
 							replyDao.delete(dto.getNum());		//글삭제시 관련 댓글 삭제
-							System.out.println("[" + num + ". 글 삭제완료]");
+							System.out.println("[" + dto.getNum() + ". 글 삭제완료]");
 							break;
 						} else {
 							System.out.println("[글 삭제 실패]");

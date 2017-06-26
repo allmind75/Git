@@ -105,6 +105,25 @@ public class ReplyDAO {
 		}
 		return false;
 	}
+	
+	public int count(int link) {
+		try {
+			String sql = "select count(*) from reply where link=" + link ;
+			con = DriverManager.getConnection(URL, USER, PW);
+			stmt = con.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				return rs.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(con, stmt, rs);
+		}
+		return 0;
+	}
+	
 	public void close(Connection con, Statement stmt, ResultSet rs) {
 		if(rs != null) {
 			try {
