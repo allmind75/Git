@@ -1,50 +1,45 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Main {
 
 	public static void main(String[] args) {
-		
+
+		//데이터베이스와 연결하는 객체
 		Connection con = null;
-		Statement stmt = null;		
-		ResultSet rs = null;
-		
-		String driver = "com.mysql.jdbc.Driver";			
-		String url = "jdbc:mysql://localhost:3306/test_db";		//MySQL 서버가 있는 호스트 URL, port, DB
-		String user = "root";
-	  	String pw = "admin1214";
-		
-		String SQL = "select * from customers order by id";
-		//String SQL = "insert into customers set id='allg', pass='5123', name='유재석', phone='010-4921-1354', email='allg@gmail.com'";
-	  	
+
+		// 1. JDBC Driver Class - com.mysql.jdbc.Driver
+		String driver = "com.mysql.jdbc.Driver";
+
+		// 2. 데이터베이스에 연결하기 위한 정보
+		// 연결문자열(Connection String) - jdbc:"Driver 종류"://IP:"포트번호"/DB명
+		String url = "jdbc:mysql://localhost:3306/test_db"; 	// 연결문자열, localhost - 127.0.0.1
+		String user = "root"; 									// 데이터베이스 ID
+		String pw = "admin1214"; 								// 데이터베이스 PW
+
+
 		try {
-			Class.forName(driver);								//MySQL JDBC 드라이버의 Driver 객체 로딩
-			con = DriverManager.getConnection(url, user, pw);
-			stmt = con.createStatement();
-			
-			/*
-			 * .excuteQuery(SQL)  : select
-			 * .excuteUpdate(SQL) : insert, update, delete ..
+			/* 1. JDBC 드라이버 로딩 - MySQL JDBC 드라이버의 Driver Class 로딩
+			 * 
+			 *		Class.forName()을 이용해서 Driver Class를 로딩하면 객체가 생성되고, DriverManager에 등록
+			 * 		Driver 클래스를 찾지 못할 경우, ClassNotFoundException 예외 발생
+			 * 
 			 */
-			rs = stmt.executeQuery(SQL);						//SQL 문장을 실행하고 결과를 리턴
-			//stmt.executeUpdate(SQL);							//SQL 문장 실행 후, 변경된 칼럼 수 int type 리턴
-		
+			Class.forName(driver);
+
+			// 2. Connection 생성 - .getConnection(연결문자열, DB-ID, DB-PW)
+			con = DriverManager.getConnection(url, user, pw);		//데이터베이스 연결
+
+			System.out.println("[Database 연결 성공]");
 			
-			while(rs.next()) {
-				
-				System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5));
-					
-			}
+		} catch (SQLException e) {
 			
+			System.out.println("[SQL Error : " + e.getMessage() +"]");
 			
-		} catch(SQLException e) {
-			System.out.println("SQL Error : " + e.getMessage());
-		} catch(ClassNotFoundException e1) {
-			System.out.println("JDBC Connector Driver 오류 : " + e1.getMessage());
+		} catch (ClassNotFoundException e1) {
+			
+			System.out.println("[JDBC Connector Driver 오류 : " + e1.getMessage() + "]");
 		}
-				
 	}
 }
