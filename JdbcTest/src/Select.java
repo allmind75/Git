@@ -10,7 +10,7 @@ public class Select {
 
 		Connection con = null; 				// 데이터 베이스와 연결을 위한 객체
 		Statement stmt = null; 				// SQL 문을 데이터베이스에 보내기위한 객체
-		ResultSet rs = null; 				// SQL 질의에 의해 생성된 테이블을 담을 객체
+		ResultSet rs = null; 				// SQL 질의에 의해 생성된 테이블을 저장하는 객체
 
 		// 1. JDBC Driver Class - com.mysql.jdbc.Driver
 		String driver = "com.mysql.jdbc.Driver";
@@ -20,7 +20,7 @@ public class Select {
 		String user = "root"; 									// 데이터베이스 ID
 		String pw = "admin1214"; 								// 데이터베이스 PW
 
-		String SQL = "SELECT * FROM customers ORDER BY id";
+		String SQL = "SELECT * FROM customers";
 
 		try {
 			// 1. JDBC 드라이버 로딩
@@ -33,18 +33,31 @@ public class Select {
 			stmt = con.createStatement();
 
 			// 4. SQL 문장을 실행하고 결과를 리턴
+			// stmt.excuteQuery(SQL) : select
+			// stmt.excuteUpdate(SQL) : insert, update, delete ..
 			rs = stmt.executeQuery(SQL);
-
-			// .excuteQuery(SQL) : select
-			// .excuteUpdate(SQL) : insert, update, delete ..
-						
+			
+			// 5. ResultSet에 저장된 데이터 얻기 - 결과가 2개 이상
 			while (rs.next()) {
 
-				System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " "
-						+ rs.getString(4) + " " + rs.getString(5));
+				String id = rs.getString("id");
+				String pass = rs.getString("pass");
+				String name = rs.getString("name");
+				String phone = rs.getString("phone");
+				String email = rs.getString(5); //rs.getString("email");
+				
+				System.out.println(id + " " + pass + " " + name + " " + phone + " " + email);
 
 			}
 			
+            //5. ResultSet에 저장된 데이터 얻기 - 결과가 1개
+			// if(rs.next()) {
+			//
+			// }
+			// else {
+			//
+			// }
+            
 			
 		} catch (SQLException e) {
 			

@@ -3,7 +3,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Main {
-
+	/*
+	 * [JDBC - Java Database Connectivity]
+	 * - Java에서 데이터베이스에 접속할 수 있도록 하는 Java API
+	 */
+	
 	public static void main(String[] args) {
 
 		//데이터베이스와 연결하는 객체
