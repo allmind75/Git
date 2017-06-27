@@ -1,14 +1,14 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Insert {
 
 	public static void main(String[] args) {
 
-		Connection con = null; 				// 데이터 베이스와 연결을 위한 객체
-		Statement stmt = null; 				// SQL 문을 데이터베이스에 보내기위한 객체
+		Connection con = null; 									// 데이터 베이스와 연결을 위한 객체
+		PreparedStatement pstmt = null; 						// SQL 문을 데이터베이스에 보내기위한 객체
 
 		// 1. JDBC Driver Class - com.mysql.jdbc.Driver
 		String driver = "com.mysql.jdbc.Driver";
@@ -18,7 +18,7 @@ public class Insert {
 		String user = "root"; 									// 데이터베이스 ID
 		String pw = "admin1214";								// 데이터베이스 PW
 
-		String SQL = "insert into customers set id='grasshopper', pass='5123', name='유재석', phone='010-4921-1354', email='allg@gmail.com'";
+		String SQL = "insert into customers(id, pass, name, phone, email) values(?, ?, ?, ?, ?)";
 
 		try {
 			// 1. JDBC 드라이버 로딩 - MySQL JDBC 드라이버의 Driver Class 로딩
@@ -27,20 +27,27 @@ public class Insert {
 			// 2. Connection 생성 - .getConnection(연결문자열, DB-ID, DB-PW)
 			con = DriverManager.getConnection(url, user, pw);
 			
-			// 3. Statement 객체 생성
-			stmt = con.createStatement();
-
-			// 4. SQL 문장을 실행하고 결과를 리턴
-			int r = stmt.executeUpdate(SQL); //SQL 문장 실행 후, 변경된 칼럼 수 int type 리턴
+			// 3. PreParedStatement 객체 생성, 객체 생성시 SQL 문장 저장
+			pstmt = con.prepareStatement(SQL);
 			
-			// .excuteQuery(SQL) : select
-			// .excuteUpdate(SQL) : insert, update, delete ..
+			// 4. pstmt.set<데이터타입>(? 순서, 값) ex).setString(), .setInt ...
+			pstmt.setString(1, "grasshopper");
+			pstmt.setString(2, "5123");
+			pstmt.setString(3, "유재석");
+			pstmt.setString(4, "010-4921-1354");
+			pstmt.setString(5, "allg@gmail.com");
+
+			// 5. SQL 문장을 실행하고 결과를 리턴 - SQL 문장 실행 후, 변경된 칼럼 수 int type 리턴
+			int r = pstmt.executeUpdate(); 						
+			
+			// pstmt.excuteQuery() : select
+			// pstmt.excuteUpdate() : insert, update, delete ..
 
 			System.out.println("변경된 칼럼 수 : " + r);
 			
 		} catch (SQLException e) {
 			
-			System.out.println("SQL Error : " + e.getMessage());
+			System.out.println("[SQL Error : " + e.getMessage() + "]");
 			
 		} catch (ClassNotFoundException e1) {
 			
@@ -49,9 +56,9 @@ public class Insert {
 		} finally {
 			
 			//사용순서와 반대로 close 함
-			if (stmt != null) {
+			if (pstmt != null) {
 				try {
-					stmt.close();
+					pstmt.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
