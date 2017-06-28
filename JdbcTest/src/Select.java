@@ -5,7 +5,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Select {
+	
+	/*
+	create database test;
 
+	create table customers(id varchar(20), pass varchar(20), name varchar(20), phone varchar(20), email varchar(20));
+
+	insert into customers(id, pass, name, phone, email) values("test1", "1234", "이름1","010-1234-5678", "test1@naver.com");
+	*/
+	
 	public static void main(String[] args) {
 
 		Connection con = null; 				// 데이터 베이스와 연결을 위한 객체
