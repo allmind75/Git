@@ -24,7 +24,7 @@ public class Main {
 		int menu;
 
 		while (run) {
-			System.out.println("[1.목록 | 2.글쓰기 | 3.글읽기 | 4.검색 | 5.종료]");
+			System.out.println("[주메뉴 - 1.목록 | 2.글쓰기 | 3.글읽기 | 4.검색 | 5.종료]");
 			System.out.print("메뉴선택> ");
 			try {
 				menu = sc.nextInt();
@@ -105,8 +105,8 @@ public class Main {
 			dto = dao.contentPrint(num);		//내용 가져오기
 
 			if (dto != null) {
-				System.out.println("< " + dto.getTitle() + " >");
-				System.out.println("- " + dto.getContent());
+				System.out.println("<제목 - " + dto.getTitle() + " >");
+				System.out.println("내용 - " + dto.getContent());
 
 				list = replyDao.printReply(dto.getNum());		
 				if (list != null) {
@@ -114,8 +114,8 @@ public class Main {
 					System.out.println("<총 " + replyDao.count(dto.getNum()) + "개의 댓글>");
 					
 					//댓글출력
-					for (ReplyDTO d : list) {
-						System.out.println(d.getContent());
+					for (int i=0 ; i<list.size() ; i++) {
+						System.out.println((i+1) + ". " + list.get(i).getContent());
 					}
 					
 				} else {
