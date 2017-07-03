@@ -9,7 +9,7 @@ public class Member {
 	private Scanner scan = new Scanner(System.in);
 	private boolean run = true;;
 	private DAO dao;
-	private DTOBean dto;
+	private DTO dto;
 	private Session session;
 
 	public static void main(String[] args) {
@@ -27,14 +27,14 @@ public class Member {
 
 		while (run) {
 
-			System.out.println("[메뉴 : 1.회원가입 | 2.로그인 | 3. 로그아웃 | 4.정보수정 | 5.탈퇴 | | 6.비밀번호 변경 | 7.회원보기 | 8.종료]");
+			System.out.println("[메뉴 : 1.회원가입 | 2.로그인 | 3. 로그아웃 | 4.정보수정 | 5.탈퇴 | 6.비밀번호 변경 | 7.회원보기 | 8.종료]");
 			System.out.print("메뉴선택> ");
 
 			try {
 				menu = scan.nextInt();
 				scan.nextLine();
 			} catch (InputMismatchException e) {
-				System.out.println("정수만 입력 " + e.getMessage());
+				System.out.println("[정수만 입력 " + e.getMessage() + "]");
 				scan = new Scanner(System.in);
 				continue;
 			}
@@ -42,12 +42,16 @@ public class Member {
 			try {
 				switch (menu) {
 				case 1:
-					memberReg();
-					if (dao.reg(dto)) {
-						System.out.println("[회원가입완료]");
+					if (session.getAttribute("UserID") == null) {
+						memberReg();
+						if (dao.reg(dto)) {
+							System.out.println("[회원가입완료]");
+						} else {
+							;
+							System.out.println("[회원가입실패]");
+						}
 					} else {
-						;
-						System.out.println("[회원가입실패]");
+						System.out.println("[로그인 상태입니다]");
 					}
 					break;
 				case 2:
@@ -68,13 +72,17 @@ public class Member {
 					}
 					break;
 				case 3:
-					memberLogout();
+					if (session.getAttribute("UserID") != null) {
+						memberLogout();
+					} else {
+						System.out.println("[로그인하지 않음]");
+					}
 					break;
 				case 4:
 					if (session.getAttribute("UserID") != null) {
 						// 로그인한 사용자 정보 출력
 						String id = session.getAttribute("UserID");
-						DTOBean dtoInfo = dao.getInfo(id);
+						DTO dtoInfo = dao.getInfo(id);
 
 						if (dtoInfo != null) {
 							System.out.println("[비밀번호 : " + dtoInfo.getPw() + "]");
@@ -111,24 +119,23 @@ public class Member {
 				case 6:
 					if (session.getAttribute("UserID") != null) {
 						String pw;
-						DTOBean dto = new DTOBean();
-						
+						DTO dto = new DTO();
+
 						System.out.println("[기존 비밀번호 입력]");
 						System.out.print("입력> ");
 						pw = scan.nextLine();
-						
+
 						dto.setId(session.getAttribute("UserID"));
 						dto.setPw(pw);
-						
+
 						if (dao.selectPW(dto)) {
 							System.out.println("[비밀번호같음]");
 							System.out.println("[변경할 비밀번호 입력]");
-							
+
 							pw = scan.nextLine();
 							dto.setPw(pw);
-							
-							
-							if(dao.updateChgPW(dto)) {
+
+							if (dao.updateChgPW(dto)) {
 								System.out.println("[새로운 비밀번호 변경 완료]");
 							} else {
 								System.out.println("[비밀번호 변경 실패]");
@@ -157,7 +164,7 @@ public class Member {
 
 	public void memberReg() {
 		String id, pw, name;
-		dto = new DTOBean();
+		dto = new DTO();
 
 		System.out.println("[회원가입 - 아이디, 비밀번호, 이름]");
 		System.out.print("아이디> ");
@@ -174,7 +181,7 @@ public class Member {
 
 	public void memeberLogin() {
 		String id, pw;
-		dto = new DTOBean();
+		dto = new DTO();
 
 		System.out.println("[로그인 - 아이디, 비밀번호]");
 		System.out.print("아이디> ");
@@ -188,22 +195,18 @@ public class Member {
 	}
 
 	public void memberLogout() {
-		if (session.getAttribute("UserID") != null) {
-			session.removeAttribute("UserID");
-			System.out.println("[로그아웃]");
-		} else {
-			System.out.println("[로그인하지 않음]");
-		}
+		session.removeAttribute("UserID");
+		System.out.println("[로그아웃]");
 	}
 
 	public void memberDelete() {
-		dto = new DTOBean();
+		dto = new DTO();
 		dto.setId(session.getAttribute("UserID"));
 		session.removeAttribute("UserID");
 	}
 
 	public void memberUpdate() {
-		String name, pw;
+		String name;
 		System.out.println("[정보수정 - 이름]");
 		System.out.print("변경할 이름> ");
 		name = scan.nextLine();

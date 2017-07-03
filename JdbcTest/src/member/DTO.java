@@ -1,6 +1,6 @@
 package member;
 
-public class DTOBean {
+public class DTO {
 
 	private String id;
 	private String pw;

@@ -27,7 +27,7 @@ public class DAO {
 		}
 	}
 
-	public boolean reg(DTOBean dto) throws SQLException {
+	public boolean reg(DTO dto) throws SQLException {
 
 		con = DriverManager.getConnection(URL, USER, PW);
 		pstmt = con.prepareStatement("INSERT INTO member(id, pw, name, reg_date) VALUES(?,MD5(?),?,now())");
@@ -47,7 +47,7 @@ public class DAO {
 
 	}
 
-	public boolean login(DTOBean dto) throws SQLException {
+	public boolean login(DTO dto) throws SQLException {
 
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
@@ -67,9 +67,9 @@ public class DAO {
 		}
 	}
 
-	public DTOBean getInfo(String id) throws SQLException {
+	public DTO getInfo(String id) throws SQLException {
 		// 기존정보가져와서 표시
-		DTOBean dto = new DTOBean();
+		DTO dto = new DTO();
 		String sql = "select pw, name from member where id='" + id + "'";
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
@@ -85,7 +85,7 @@ public class DAO {
 		return null;
 	}
 
-	public boolean updateMemberInfo(DTOBean dto) throws SQLException {
+	public boolean updateMemberInfo(DTO dto) throws SQLException {
 
 		// 기존정보 수정
 		String sql = "update member set name=?, pw=md5(?) where id=?";
@@ -107,7 +107,7 @@ public class DAO {
 
 	}
 
-	public boolean delete(DTOBean dto) throws SQLException {
+	public boolean delete(DTO dto) throws SQLException {
 
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
@@ -146,7 +146,7 @@ public class DAO {
 		}
 	}
 
-	public boolean selectPW(DTOBean dto) throws SQLException {
+	public boolean selectPW(DTO dto) throws SQLException {
 
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
@@ -162,7 +162,7 @@ public class DAO {
 		return false;
 	}
 
-	public boolean updateChgPW(DTOBean dto) throws SQLException {
+	public boolean updateChgPW(DTO dto) throws SQLException {
 
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
