@@ -8,9 +8,15 @@ public class DaoTest {
 	}
 
 	public static void print() {
+		
 		DAO dao = new DAO();
-
-		ArrayList<Info> list = dao.select();
+		
+		//select1()
+		dao.select1();
+		
+		
+		//select2();
+		ArrayList<Info> list = dao.select2();
 
 		if (list != null) {
 			for (Info i : list) {
