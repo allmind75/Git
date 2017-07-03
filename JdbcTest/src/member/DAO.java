@@ -15,24 +15,16 @@ public class DAO {
 	private ResultSet rs;
 
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private final String URL = "jdbc:mysql://localhost:3306/java";
-	private final String USER = "root";
-	private final String PW = "admin1214";
+	private static final String URL = "jdbc:mysql://localhost:3306/java";
+	private static final String USER = "root";
+	private static final String PW = "admin1214";
 
-	static {
+	public DAO() {
 		try {
-			init();
+			Class.forName(DRIVER);
 		} catch (ClassNotFoundException e) {
 			System.out.println("Class Load fail : " + e.getMessage());
 		}
-	}
-	
-	public DAO() {
-
-	}
-
-	private static void init() throws ClassNotFoundException {
-		Class.forName(DRIVER);
 	}
 
 	public boolean reg(DTOBean dto) throws SQLException {
@@ -53,21 +45,20 @@ public class DAO {
 			return false;
 		}
 
-		
 	}
-	
+
 	public boolean login(DTOBean dto) throws SQLException {
-		
+
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
 
-		String id = "'" +dto.getId() + "'";
+		String id = "'" + dto.getId() + "'";
 		String pw = "MD5('" + dto.getPw() + "')";
 		String sql = "select id, pw from member where id=" + id + " and pw=" + pw;
-		
+
 		rs = stmt.executeQuery(sql);
-		
-		if(rs.isBeforeFirst()) {
+
+		if (rs.isBeforeFirst()) {
 			close(con, stmt, null, rs);
 			return true;
 		} else {
@@ -75,57 +66,56 @@ public class DAO {
 			return false;
 		}
 	}
-	
 
 	public DTOBean getInfo(String id) throws SQLException {
-		//기존정보가져와서 표시
+		// 기존정보가져와서 표시
 		DTOBean dto = new DTOBean();
 		String sql = "select pw, name from member where id='" + id + "'";
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
 		rs = stmt.executeQuery(sql);
-		
-		if(rs.next()) {
+
+		if (rs.next()) {
 			dto.setPw(rs.getString("pw"));
 			dto.setName(rs.getString("name"));
 			return dto;
 		}
-		
+
 		close(con, stmt, null, rs);
 		return null;
 	}
-	
+
 	public boolean updateMemberInfo(DTOBean dto) throws SQLException {
-		
-		//기존정보 수정
+
+		// 기존정보 수정
 		String sql = "update member set name=?, pw=md5(?) where id=?";
-		
+
 		con = DriverManager.getConnection(URL, USER, PW);
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, dto.getName());
 		pstmt.setString(2, dto.getPw());
 		pstmt.setString(3, dto.getId());
-		
+
 		int r = pstmt.executeUpdate();
-		if( r == 1) {
+		if (r == 1) {
 			close(con, stmt, null, rs);
 			return true;
 		} else {
 			close(con, stmt, null, rs);
 			return false;
 		}
-		
+
 	}
-	
+
 	public boolean delete(DTOBean dto) throws SQLException {
-		
+
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
-		
+
 		String sql = "delete from member where id='" + dto.getId() + "'";
-		
+
 		int r = stmt.executeUpdate(sql);
-		if(r == 1) {
+		if (r == 1) {
 			close(con, stmt, null, rs);
 			return true;
 		} else {
@@ -133,92 +123,93 @@ public class DAO {
 			return false;
 		}
 	}
-	
+
 	public void updateLoginCnt(String id) throws SQLException {
-	
+
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
-		
+
 		String sqlR = "select count from member where id='" + id + "'";
 		int cnt = 0;
-		
+
 		rs = stmt.executeQuery(sqlR);
-		while(rs.next()) {
+		while (rs.next()) {
 			cnt = rs.getInt(1);
 		}
-		
+
 		String sql = "update member set count=" + (++cnt) + " where id='" + id + "'";
 		int r = stmt.executeUpdate(sql);
-		if(r == 1) {
+		if (r == 1) {
 			close(con, stmt, null, rs);
 		} else {
 			close(con, stmt, null, rs);
 		}
 	}
-	
+
 	public boolean selectPW(DTOBean dto) throws SQLException {
-		
+
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
 		String sql = "select id, pw from member where id='" + dto.getId() + "' and pw=md5('" + dto.getPw() + "')";
 		rs = stmt.executeQuery(sql);
-		
-		if(rs.next()) {
+
+		if (rs.next()) {
 			close(con, stmt, null, rs);
 			return true;
 		}
-		
+
 		close(con, stmt, null, rs);
 		return false;
 	}
 
 	public boolean updateChgPW(DTOBean dto) throws SQLException {
-		
+
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
 		String sql = "update member set pw=md5('" + dto.getPw() + "') where id='" + dto.getId() + "'";
 		int rs = stmt.executeUpdate(sql);
-		
-		if(rs == 1) {
+
+		if (rs == 1) {
 			close(con, stmt, null, null);
 			return true;
 		}
 		close(con, stmt, null, null);
 		return false;
 	}
-	
+
 	public void print() throws SQLException {
-		
+
 		con = DriverManager.getConnection(URL, USER, PW);
 		stmt = con.createStatement();
-		
+
 		String sql = "select * from member";
-		
+
 		rs = stmt.executeQuery(sql);
-		
-		while(rs.next()) {
-			System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5));
+
+		while (rs.next()) {
+			System.out.println(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4)
+					+ " " + rs.getString(5));
 		}
-		
+
 		close(con, stmt, null, rs);
-		
+
 	}
-	
+
 	public void close(Connection con, Statement stmt, PreparedStatement pstmt, ResultSet rs) {
-		if(rs != null) {
+		if (rs != null) {
 			try {
 				rs.close();
 				rs = null;
-			} catch(Exception e) {
-				
+			} catch (Exception e) {
+
 			}
 		}
 		if (pstmt != null) {
 			try {
 				pstmt.close();
 				pstmt = null;
-			} catch(Exception e) {
-				
+			} catch (Exception e) {
+
 			}
 		}
 		if (stmt != null) {
