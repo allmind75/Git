@@ -16,7 +16,7 @@ public class List {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		ArrayList<String> list = new ArrayList<String>(30);	//객체 30개 저장가능, 초기값 10
+		ArrayList<String> list = new ArrayList<String>(30);	//객체 30개 저장가능(30개 초과시 자동적으로 저장용량 증가), 초기값 10
 		
 		list.add("Java");
 		list.add("JDBC");
