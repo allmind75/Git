@@ -7,6 +7,18 @@ public class Info {
 	private String phone;
 	private String email;
 	
+	public Info() {
+		
+	}
+	
+	public Info(String id, String pass, String name, String phone, String email) {
+		this.id = id;
+		this.pass = pass;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+	}
+	
 	public String getId() {
 		return id;
 	}
