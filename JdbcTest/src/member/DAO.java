@@ -30,7 +30,7 @@ public class DAO {
 	public boolean reg(DTO dto) throws SQLException {
 
 		con = DriverManager.getConnection(URL, USER, PW);
-		pstmt = con.prepareStatement("INSERT INTO member(id, pw, name, reg_date) VALUES(?,MD5(?),?,now())");
+		pstmt = con.prepareStatement("INSERT INTO member VALUES(?,MD5(?),?,0,now())");
 
 		pstmt.setString(1, dto.getId());
 		pstmt.setString(2, dto.getPw());
