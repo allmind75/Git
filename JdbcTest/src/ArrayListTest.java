@@ -6,6 +6,7 @@ public class ArrayListTest {
 
 		System.out.println("[Array]");
 		// 1. ¹è¿­
+		
 		Info[] infoArr = new Info[5];
 
 		for (int i = 0; i < infoArr.length; i++) {
