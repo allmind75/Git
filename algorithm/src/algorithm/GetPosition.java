@@ -4,7 +4,7 @@ public class GetPosition {
 
 	/*
 	 * 직사각형 만드는 3개의 좌표가 주어진다.
-	 * 이때 나머지 하나 좌표 구하기 
+	 * 이때 필요한 나머지 하나 좌표 구하기 
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
