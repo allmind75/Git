@@ -10,89 +10,79 @@ public class Num1260_dfs_bfs {
 	 * https://www.acmicpc.net/problem/1260
 	 */
 	
-	static int[][] graph;
-	static boolean visited[];
-	static int N;
-	static int E;
-	static int startPoint;
+	public static int N, M, V;
+	public static int x, y;
 	
-	public static void dfs(int i) {
-		visited[i] = true;
-		System.out.print(i + " ");
+	public static int[][] graph = new int[1001][1001];
+	public static boolean visited[] = new boolean[10001];
+	
+	public static void DFS(int V) {
 		
-		for(int j=1 ; j<=N ; j++) {
-			//System.out.println("search - (" + i + ", " + j + ")");
-			
-			if(graph[i][j] == 1 && visited[j] == false) {
-				
-				//System.out.println("\tfind - (" + i + ", " + j + ")");
-				dfs(j);
+		System.out.print(V + " ");
+		visited[V] = true;
+		
+		for(int i=1 ; i<=N ; i++) {
+			if(graph[V][i] == 1 && visited[i] == false) {
+				DFS(i);
 			}
 		}
 	}
 	
-	
-	public static void bfs(int i) {
+	public static void BFS(int V) {
 		
-		Queue<Integer> q = new LinkedList<Integer>();
-		q.offer(i);
-		visited[i] = true;
-		System.out.print(i + " ");
+		Queue<Integer> queue = new LinkedList<Integer>();
+		int out;
 		
-		int temp;
-		while(!q.isEmpty()) {
-			temp = q.poll();
-			for(int j=1 ; j <= N ; j++) {
-				
-				//System.out.println("\nsearch - (" + temp + ", " + j + ")");
-
-				if(graph[temp][j] == 1 && visited[j] == false) {
-					
-					//System.out.println("\tfind - (" + temp + ", " + j + ")");
-
-					q.offer(j);
-					visited[j] = true;
-					System.out.print(j + " ");
+		//큐에 시적점 추가
+		queue.offer(V);
+		visited[V] = true;
+		System.out.print(V + " ");
+		
+		//큐에 값이 없을때까지 실행
+		while(!queue.isEmpty()) {
+			//큐에서 값 가져옴
+			out = queue.poll();
+			
+			for(int i=1 ; i<= N ; i++) {
+				if(graph[out][i] == 1 && visited[i] == false) {
+					//방문안한 점을 찾으면, 큐에 저장
+					queue.offer(i);
+					visited[i] = true;
+					System.out.print(i + " ");
 				}
 			}
 		}
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		int a,b;
-		
-		graph = new int[1001][1001];
-		visited = new boolean[10001];
 		
 		Scanner sc = new Scanner(System.in);
 		
 		N = sc.nextInt();
-		E = sc.nextInt();
-		startPoint = sc.nextInt();
+		M = sc.nextInt();
+		V = sc.nextInt();
 		
-		
-		//DFS
-		for(int i=1 ; i<=E ; i++) {
-			a = sc.nextInt();
-			b = sc.nextInt();
-			
-			graph[a][b] = graph[b][a] = 1;
+		//두 정점을 2차원 배열에 저장
+		//양방향이므로 graph[x][y] = graph[y][x] = 1 로 저장
+		for(int i=1 ; i<=M ; i++) {
+			x = sc.nextInt();
+			y = sc.nextInt();
+			graph[x][y] = graph[y][x] = 1;
 		}
 		
-		dfs(startPoint);
 		
+		DFS(V);
 		
-		//BFS
-		for(int i=1 ; i <= N ; i++) {
+		//reset visited
+		for(int i=1 ; i<=N ; i++){
 			visited[i] = false;
 		}
 		
 		System.out.println();
+		BFS(V);
 		
-		bfs(startPoint);
 		sc.close();
+	
 	}
 
 }
